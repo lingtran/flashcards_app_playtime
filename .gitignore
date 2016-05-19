@@ -15,5 +15,7 @@
 /log/*
 !/log/.keep
 /tmp
+.DS_Store
 
 initial_thoughts.md
+temp_screenshot.tiff
