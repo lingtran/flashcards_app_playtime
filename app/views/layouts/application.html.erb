@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FlashcardsAppPlaytime</title>
-  <%= stylesheet_link_tag    'application', media: 'all' => true %>
+  <title>Lingo App</title>
+  <%= stylesheet_link_tag    'application', media: 'all'%>
+  <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+  <div class="container">
+    <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+
+    <%= render partial: 'layouts/navbar' %>
+
+    <% flash.each do |name, message| %>
+      <%= content_tag :div, message, id: "flash_#{name}" %>
+    <% end %>
+
+    <%= yield %>
+
+</div>
 
 </body>
+
+<script src="semantic/dist/semantic.min.js"></script>
 </html>

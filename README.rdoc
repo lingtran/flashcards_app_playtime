@@ -1,3 +1,0 @@
-== README
-
-Brainstorming/playground repo for designing potential flashcards app that considers brain-based learning principles.

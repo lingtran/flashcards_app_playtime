@@ -7,6 +7,8 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'omniauth'
+require 'omniauth-facebook'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -24,8 +26,9 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
+Capybara.app = LingoApp::Application
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
@@ -44,7 +47,14 @@ RSpec.configure do |config|
         example.run
       end
     end
-    
+
+    config.before(:suite) do
+      Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
+      puts "before suite oauth"
+    end
+
+    config.include(OmniAuthHelpers)
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
