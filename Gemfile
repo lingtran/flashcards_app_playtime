@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
+gem 'rename'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -33,8 +34,18 @@ gem 'unicorn'
 # Use Rails 12Factor for Heroku Error Logging
 gem 'rails_12factor', group: :production
 
+gem 'figaro'
+gem 'faraday'
+gem 'omniauth'
+gem 'omniauth-facebook'
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
+  gem 'simplecov', :require => false
+end
+
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'rspec-rails'
   gem 'pry'
   gem 'factory_girl_rails'

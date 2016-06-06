@@ -19,3 +19,6 @@
 
 initial_thoughts.md
 temp_screenshot.tiff
+/config/application.yml
+/coverage
+/spec/cassettes/*

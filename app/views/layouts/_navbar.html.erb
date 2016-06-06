@@ -1,0 +1,8 @@
+<nav class="nav-bar">
+  <% if current_user %>
+  Hello, <%= current_user.name %>
+    <%= link_to "Logout", logout_path, method: :delete , id: "sign_out"%>
+  <% else %>
+    <%= link_to "Sign in with Facebook", facebook_login_path, id: "sign_in" %>
+  <% end %>
+</nav>
