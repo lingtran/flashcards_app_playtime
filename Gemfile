@@ -39,6 +39,8 @@ gem 'faraday'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+gem 'semantic-ui-rails'
+
 group :test do
   gem 'vcr'
   gem 'webmock'
