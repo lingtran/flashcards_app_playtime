@@ -51,11 +51,11 @@
 <part>id</part>
 </key>
 </table>
-<table x="1139" y="135" name="words">
+<table x="1139" y="135" name="dictionary">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
-<row name="name" null="1" autoincrement="0">
+<row name="word" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="definition" null="1" autoincrement="0">
@@ -76,9 +76,13 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="decks" row="id" />
 </row>
-<row name="word_id" null="1" autoincrement="0">
+<row name="dictionary_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="words" row="id" />
+<default>NULL</default><relation table="dictionary" row="id" />
+</row>
+<row name="question_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="questions" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
@@ -112,18 +116,26 @@
 <part>id</part>
 </key>
 </table>
-<table x="203" y="151" name="sessions">
+<table x="203" y="151" name="study_sessions">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="date" null="1" autoincrement="0">
 <datatype>TIMESTAMP</datatype>
 <default>NULL</default></row>
-<row name="id_user_decks" null="1" autoincrement="0">
+<row name="user_decks_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="user_decks" row="id" />
 </row>
 <row name="score" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="892" y="361" name="questions">
+<row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
