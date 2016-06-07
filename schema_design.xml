@@ -87,6 +87,9 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="questions" row="id" />
 </row>
+<row name="answer_result" null="1" autoincrement="0">
+<datatype>ENUM</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -137,9 +140,12 @@
 <part>id</part>
 </key>
 </table>
-<table x="892" y="361" name="questions">
+<table x="906" y="281" name="questions">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="name" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
