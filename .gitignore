@@ -22,3 +22,7 @@ temp_screenshot.tiff
 /config/application.yml
 /coverage
 /spec/cassettes/*
+/public/assets/*
+/db/dict-sqlite-dumpfile201606061148.sql
+/dictionary
+schema_design.xml
