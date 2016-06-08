@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Deck, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "validations" do
+    it { should validate_presence_of(:name) }
+  end
+
+  context "association" do
+    it { should have_many(:user_decks) }
+    it { should have_many(:users).through(:user_decks) }
+  end
 end

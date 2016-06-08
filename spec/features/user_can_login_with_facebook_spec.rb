@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "oauth login", type: :feature do
   VCR.use_cassette "omniauth_login" do
     scenario "user can log in with Facebook account" do
-      create(:dict)
+      create(:word)
       user = set_user
 
       visit root_path

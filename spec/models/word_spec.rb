@@ -7,4 +7,9 @@ RSpec.describe Word, type: :model do
     it { should validate_presence_of(:pinyin) }
     it { should validate_presence_of(:definition) }
   end
+
+  context "associations" do
+    it { should have_many(:deck_words) }
+    it { should have_many(:decks).through(:deck_words) }
+  end
 end
