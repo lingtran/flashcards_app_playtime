@@ -1,5 +1,5 @@
 class FlashcardsController < ApplicationController
   def index
-    @word = Dict.find(1)
+    @word = Word.find(10)
   end
 end
