@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Dict, type: :model do
+RSpec.describe Word, type: :model do
   context "validations" do
     it { should validate_presence_of(:trad) }
     it { should validate_presence_of(:simp) }

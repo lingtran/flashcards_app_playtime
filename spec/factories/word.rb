@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :dict do
+  factory :word do
     trad "點心"
     simp "点心"
     pinyin "dian3xin4"
