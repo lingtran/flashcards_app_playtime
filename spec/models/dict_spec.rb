@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Dict, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "validations" do
+    it { should validate_presence_of(:trad) }
+    it { should validate_presence_of(:simp) }
+    it { should validate_presence_of(:pinyin) }
+    it { should validate_presence_of(:definition) }
+  end
 end
