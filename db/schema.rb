@@ -11,20 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608051340) do
+ActiveRecord::Schema.define(version: 20160608153706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "dict", force: :cascade do |t|
-    t.text "trad"
-    t.text "simp"
-    t.text "pinyin"
-    t.text "definition"
-  end
-
-  add_index "dict", ["simp"], name: "ix_simp", using: :btree
-  add_index "dict", ["trad"], name: "ix_trad", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -37,5 +27,15 @@ ActiveRecord::Schema.define(version: 20160608051340) do
     t.string   "provider"
     t.string   "graph"
   end
+
+  create_table "words", force: :cascade do |t|
+    t.text "trad"
+    t.text "simp"
+    t.text "pinyin"
+    t.text "definition"
+  end
+
+  add_index "words", ["simp"], name: "ix_simp", using: :btree
+  add_index "words", ["trad"], name: "ix_trad", using: :btree
 
 end

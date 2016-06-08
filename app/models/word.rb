@@ -1,4 +1,4 @@
-class Dict < ActiveRecord::Base
+class Word < ActiveRecord::Base
   validates :trad, presence: true
   validates :simp, presence: true
   validates :pinyin, presence: true
