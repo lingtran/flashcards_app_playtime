@@ -37,7 +37,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="656" y="147" name="decks">
+</datatypes><table x="561" y="75" name="decks">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -51,7 +51,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="1139" y="135" name="dictionary">
+<table x="1254" y="147" name="dictionary">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -71,7 +71,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="879" y="45" name="deck_words">
+<table x="865" y="58" name="deck_words">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -83,19 +83,12 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="dictionary" row="id" />
 </row>
-<row name="question_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="questions" row="id" />
-</row>
-<row name="answer_result" null="1" autoincrement="0">
-<datatype>ENUM</datatype>
-<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 <comment>reference deck, reference word</comment>
 </table>
-<table x="190" y="491" name="user">
+<table x="78" y="87" name="user">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -106,7 +99,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="397" y="277" name="user_decks">
+<table x="282" y="70" name="user_decks">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -122,7 +115,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="203" y="151" name="study_sessions">
+<table x="337" y="295" name="study_sessions">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -140,7 +133,61 @@
 <part>id</part>
 </key>
 </table>
-<table x="906" y="281" name="questions">
+<table x="753" y="278" name="deck_word_questions">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="deck_word_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="deck_words" row="id" />
+</row>
+<row name="question_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="questions" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="1054" y="420" name="deck_word_question_choices">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="deck_word_question_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="deck_word_questions" row="id" />
+</row>
+<row name="name" null="1" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+<default>NULL</default></row>
+<row name="is_correct" null="1" autoincrement="0">
+<datatype>ENUM</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="601" y="609" name="deck_user_answers">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="user_selected_answer_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="deck_word_question_choices" row="id" />
+</row>
+<row name="deck_word_question_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="deck_word_questions" row="id" />
+</row>
+<row name="study_session_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="study_sessions" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="712" y="488" name="questions">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
