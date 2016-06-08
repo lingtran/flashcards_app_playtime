@@ -9,15 +9,12 @@ module OmniAuthHelpers
     OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
       provider: "facebook",
       uid: "1234",
-      extra: {
-        raw_info: {
-          raw_id: "1234",
-          name: "Ling",
-          login: "lxiutran"
-        }
+      info: {
+        email: "chocolatier@someday.org",
+        password: "chocolate"
       },
       credentials: {
-        token: ENV['?'],
+        token: ENV['facebook_user_token'],
         secret: ENV['facebook_secret']
       }
       })
