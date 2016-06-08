@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :user_decks
+  has_many :decks, through: :user_decks
+
   validates :uid, presence: true
   validates :provider, presence: true
   validates :email, presence: true

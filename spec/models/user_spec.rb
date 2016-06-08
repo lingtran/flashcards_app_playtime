@@ -21,4 +21,9 @@ RSpec.describe User, type: :model do
     it { should_not validate_presence_of(:oauth_expires_at) }
     it { should_not validate_presence_of(:graph) }
   end
+
+  context "associations" do
+    it { should have_many(:user_decks) }
+    it { should have_many(:decks).through(:user_decks) }
+  end
 end
