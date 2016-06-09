@@ -13,11 +13,11 @@
 
 </head>
 <body>
+  <%= render partial: 'layouts/navbar' %>
 
-  <div class="container">
+  <main class="container">
     <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
 
-      <%= render partial: 'layouts/navbar' %>
 
       <% flash.each do |name, message| %>
         <%= content_tag :div, message, id: "flash_#{name}" %>
@@ -25,7 +25,7 @@
 
       <%= yield %>
 
-  </div>
+  </main>
 
 </body>
 
