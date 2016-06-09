@@ -1,14 +1,14 @@
-<div class="container" id="deck-container">
+<div class="ui basic container center aligned basic teal segment" id="deck-container">
 
-    <div class="ui people shape" id="flashcards">
-        <div class="ui people shape">
+  <div class="ui people shape deck-section" id="flashcards">
+    <div class="ui people shape">
       <div class="sides">
         <div class="active side">
           <div class="ui card">
             <div class="content">
               <div class="header"> <%= @word.simp %> </div>
               <div class="meta">
-                <a> <%= @word.pinyin %>  </a>
+                <a> Select the correct pinyin </a>
               </div>
             </div>
           </div>
@@ -18,15 +18,15 @@
             <div class="image">
               <img src="http://www.newyorker.com/wp-content/uploads/2014/08/Stokes-Hello-Kitty2-1200.jpg", width="500px">
             </div>
-            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div><!--sides-->
+    </div><!--people-->
 
-    <br></br>
+  </div> <!--flashcards deck-section -->
 
-    <div class="ui icon direction buttons">
+  <div class="basic segments deck-section">
+    <div class="ui icon direction buttons deck-section">
       <div id="left-button" class="ui button visible content" data-animation="flip" data-direction="left" title="Flip Left">
         <i class="long arrow left icon"> </i>
       </div>
@@ -40,17 +40,23 @@
         <i class="long arrow right icon"> </i>
       </div>
     </div>
+  </div> <!-- buttons deck-section-->
 
-    <div class="ui divider"></div>
+  <div class="ui divider"></div>
 
-    <div class="question">
-      This is where question will go
+  <div class="deck-section">
+    <div class="choice deck-section">
+        <li id="correct-choice">
+          <%= @word.pinyin %>
+        </li>
     </div>
-  </div>
+  </div><!--deck-section-->
 
-  <!-- want a progress bar for deck? -->
 </div>
 
-<div class="container" id="overall progress tracker">
-<!-- report performance across decks -->
+<div class="ui container center aligned basic teal segment">
+  <div id="overall progress tracker">
+  <!-- report performance across decks -->
+  Placeholder for chart
+  </div>
 </div>

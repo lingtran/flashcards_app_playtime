@@ -1,4 +1,8 @@
 #deck-container {
+  margin: 5%;
+}
+
+.deck-section {
   border: 5%;
-  margin: 5%
+  padding: 1%
 }

@@ -1,5 +1,5 @@
 class FlashcardsController < ApplicationController
   def index
-    @word = Word.find(1)
+    @word = Word.all.sample
   end
 end
