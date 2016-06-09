@@ -1,8 +1,16 @@
-<nav class="nav-bar">
-  <% if current_user %>
-  Hello, <%= current_user.name %>
-    <%= link_to "Logout", logout_path, method: :delete , id: "sign_out"%>
-  <% else %>
-    <%= link_to "Sign in with Facebook", facebook_login_path, id: "sign_in" %>
-  <% end %>
-</nav>
+<% if current_user %>
+<div class="ui stackable menu">
+  <div class="item">
+    <%= link_to "Lingo App", root_path %>
+  </div>
+  <div class="right menu">
+    <a class="item">
+      <img class="ui avatar image" src="<%= current_user.graph %>">
+      <span>Signed in as <%= current_user.name %></span>
+    </a>
+    <div class="item">
+      <%= link_to "Log Out", logout_path, method: :delete, id: "sign_out" %>
+    </div>
+  </div>
+</div>
+<% end %>

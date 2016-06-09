@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :flashcards, only: [:index]
+  resources :study_sessions, only: [:create]
 
   get '/auth/facebook', as: :facebook_login
   get '/auth/failure', to: redirect('/')
