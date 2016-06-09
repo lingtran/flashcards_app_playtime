@@ -1,12 +1,13 @@
 <div class="ui basic container center aligned basic teal segment" id="deck-container">
 
+<% @deck_words.each do |deck_word| %>
   <div class="ui people shape deck-section" id="flashcards">
     <div class="ui people shape">
       <div class="sides">
         <div class="active side">
           <div class="ui card">
             <div class="content">
-              <div class="header"> <%= @word.simp %> </div>
+              <div class="header"> <%= deck_word.word.simp %> </div>
               <div class="meta">
                 <a> Select the correct pinyin </a>
               </div>
@@ -45,12 +46,37 @@
   <div class="ui divider"></div>
 
   <div class="deck-section">
-    <div class="choice deck-section">
-        <li id="correct-choice">
-          <%= @word.pinyin %>
-        </li>
-    </div>
+    <div class="ui form choice deck-section">
+      <div class="grouped fields">
+        <div class="field">
+          <div class="ui radio checkbox" id="correct-choice">
+            <input type="radio" name="choice" checked="" tabindex="0" class="hidden">
+            <label><%= deck_word.word.pinyin %></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="grouped fields">
+        <div class="field">
+          <div class="ui radio checkbox" id="wrong-choice">
+            <input type="radio" name="choice" checked="" tabindex="0" class="hidden">
+            <label>  <%= decoys(deck_word.word.simp).first.pinyin %> </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="grouped fields">
+        <div class="field">
+          <div class="ui radio checkbox" id="wrong-choice">
+            <input type="radio" name="choice" checked="" tabindex="0" class="hidden">
+            <label>  <%= decoys(deck_word.word.simp).last.pinyin %> </label>
+          </div>
+        </div>
+      </div>
+
+    </div> <!--deck-section-choices-->
   </div><!--deck-section-->
+<% end %>
 
 </div>
 
