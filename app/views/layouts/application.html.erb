@@ -16,7 +16,7 @@
   <%= render partial: 'layouts/navbar' %>
 
   <main class="container">
-  
+
       <% flash.each do |name, message| %>
         <%= content_tag :div, message, id: "flash_#{name}" %>
       <% end %>
