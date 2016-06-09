@@ -8,7 +8,6 @@ RSpec.describe "user goes through a deck", type: :feature do
       word_two = word_two.word
       create_list(:decoys, 5)
       decoys_set_one = WrongChoices.options_for(word_one.simp)
-      decoys_set_two = WrongChoices.options_for(word_two.simp)
       user = user_logs_in
 
       expect(page).to have_current_path flashcards_path
@@ -19,32 +18,31 @@ RSpec.describe "user goes through a deck", type: :feature do
         expect(page).to have_content "Select the correct pinyin"
       end
 
-      within(page.all("#correct-choice")[0]) do
+      # within(page.all(input[name=correct_choice])[0]) do
         expect(page).to have_content word_one.pinyin
-        expect(page).not_to have_content decoys_set_one.first.pinyin
-      end
-save_and_open_page
+        # expect(page).not_to have_content decoys_set_one.first.pinyin
+      # end
       # user checks circle for correct answer to first word
-      within(page.all("#correct-choice")[0]) do
-        choose("#{word_one.pinyin}")
-      end
+      # within(page.all("#correct-choice")[0]) do
+        find("#correct_choice").choose("#{word_one.pinyin}")
+      # end
 
       # user clicks on next arrow
-      click_link("Next")
+      click_button("Save")
 
-      # second word
-      within("#flashcards") do
-        expect(page).to have_content words.last.simp
-        expect(page).to have_content "Select the correct pinyin"
-      end
-
-      # user checks circle for incorrect answer to last word
-      within(".choice deck-section") do
-        choose("#{wrong_choices.second.pinyin}")
-      end
-
-      # user clicks on next arrow
-      click_link("Next")
+      # # second word
+      # within("#flashcards") do
+      #   expect(page).to have_content words.last.simp
+      #   expect(page).to have_content "Select the correct pinyin"
+      # end
+      #
+      # # user checks circle for incorrect answer to last word
+      # within(".choice deck-section") do
+      #   choose("#{wrong_choices.second.pinyin}")
+      # end
+      #
+      # # user clicks on next arrow
+      # click_link("Next")
 
       # score pops up, where score should be 1 out of 2 questions were correct
       within(".score-popup") do

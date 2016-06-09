@@ -45,39 +45,21 @@
 
   <div class="ui divider"></div>
 
-  <div class="deck-section">
+  <div class="basic segments deck-section">
     <div class="ui form choice deck-section">
-      <div class="grouped fields">
-        <div class="field">
-          <div class="ui radio checkbox" id="correct-choice">
-            <input type="radio" name="choice" checked="" tabindex="0" class="hidden">
-            <label><%= deck_word.word.pinyin %></label>
-          </div>
-        </div>
-      </div>
+      <%= form_tag(study_sessions_path, method: "create") do %>
+        <%= radio_button_tag(:choice, deck_word.word.pinyin) %>
+        <%= label_tag(:correct_choice, deck_word.word.pinyin) %>
 
-      <div class="grouped fields">
-        <div class="field">
-          <div class="ui radio checkbox" id="wrong-choice">
-            <input type="radio" name="choice" checked="" tabindex="0" class="hidden">
-            <label>  <%= decoys(deck_word.word.simp).first.pinyin %> </label>
-          </div>
-        </div>
-      </div>
+        <%= radio_button_tag(:choice, decoys(deck_word.word.simp).first.pinyin) %>
+        <%= label_tag(:wrong_choice, decoys(deck_word.word.simp).first.pinyin) %>
 
-      <div class="grouped fields">
-        <div class="field">
-          <div class="ui radio checkbox" id="wrong-choice">
-            <input type="radio" name="choice" checked="" tabindex="0" class="hidden">
-            <label>  <%= decoys(deck_word.word.simp).last.pinyin %> </label>
-          </div>
-        </div>
-      </div>
-
-    </div> <!--deck-section-choices-->
+        <%= radio_button_tag(:choice, decoys(deck_word.word.simp).last.pinyin) %>
+        <%= label_tag(:wrong_choice, decoys(deck_word.word.simp).last.pinyin) %>
+      <% end %>
+    </div><!--deck-section-choices-->
   </div><!--deck-section-->
-<% end %>
-
+  <% end %>
 </div>
 
 <div class="ui container center aligned basic teal segment">
