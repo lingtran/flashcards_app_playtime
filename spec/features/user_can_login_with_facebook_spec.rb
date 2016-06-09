@@ -12,7 +12,11 @@ RSpec.describe "oauth login", type: :feature do
       expect(page).to have_current_path flashcards_path
       expect(page).to have_content "点心"
       expect(page).to have_content user.name
-      expect(page).to have_link "Logout"
+      expect(page).to have_link "Log Out"
+
+      visit root_path
+
+      expect(page).to have_current_path flashcards_path
     end
   end
 end

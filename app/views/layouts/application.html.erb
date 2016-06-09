@@ -16,9 +16,7 @@
   <%= render partial: 'layouts/navbar' %>
 
   <main class="container">
-    <div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
-
-
+  
       <% flash.each do |name, message| %>
         <%= content_tag :div, message, id: "flash_#{name}" %>
       <% end %>
