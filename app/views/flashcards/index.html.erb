@@ -1,58 +1,80 @@
 <div class="ui basic container center aligned basic teal segment" id="deck-container">
 
-  <div class="ui people shape deck-section" id="flashcards">
-    <div class="ui people shape">
-      <div class="sides">
-        <div class="active side">
-          <div class="ui card">
-            <div class="content">
-              <div class="header"> <%= @word.simp %> </div>
-              <div class="meta">
-                <a> Select the correct pinyin </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="side">
-          <div class="ui card">
-            <div class="image">
-              <img src="http://www.newyorker.com/wp-content/uploads/2014/08/Stokes-Hello-Kitty2-1200.jpg", width="500px">
-            </div>
-          </div>
-        </div>
-      </div><!--sides-->
-    </div><!--people-->
+    <% @deck_words.each_with_index do |deck_word, index| %>
 
-  </div> <!--flashcards deck-section -->
+      <div class="ui three column centered grid">
+        <div class="sixteen wide column centered row green">
+                <div class="basic segment deck-section">
+                  <div class="ui direction buttons deck-section">
+                    <button id="flip-over-button-<%= index %>" class="ui button" data-animation="flip" data-direction="over" title="Flip Over">
+                      Flip Card Over
+                    </button>
+                    <button id="flip-back-button-<%= index %>" class="ui button" data-animation="flip" data-direction="back" title="Flip Back">
+                      Flip Card Back
+                    </button>
+                  </div>
+                </div> <!-- buttons deck-section-->
+        </div> <!-- column -->
 
-  <div class="basic segments deck-section">
-    <div class="ui icon direction buttons deck-section">
-      <div id="left-button" class="ui button visible content" data-animation="flip" data-direction="left" title="Flip Left">
-        <i class="long arrow left icon"> </i>
-      </div>
-      <div id="up-button" class="ui button" data-animation="flip" data-direction="up" title="Flip Up">
-        <i class="long arrow up icon"> </i>
-      </div>
-      <div id="down-button" class="ui icon button" data-animation="down" data-direction="down">
-        <i class="long arrow down icon"> </i>
-      </div>
-      <div id="right-button" class="ui icon button" data-animation="right" data-direction="right" title="Flip Right">
-        <i class="long arrow right icon"> </i>
-      </div>
-    </div>
-  </div> <!-- buttons deck-section-->
+        <div class="sixteen wide column centered row blue">
+            <div class="column yellow">
+                <div class="basic segment deck-section">
+                  <div class="ui people shape" id="flashcard-<%= index %>">
+                    <div class="ui people shape deck-section">
+                      <div class="sides flashcard">
+                        <div class="active side flashcard">
+                          <div class="ui card">
+                            <div class="content">
+                              <div class="header" id="flashcard-<%= index %>-header">
+                                <%= deck_word.word.simp %>
+                              </div>
+                              <div class="meta" id="flashcard-<%= index %>-question">
+                                <a> Select the correct pinyin </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div> <!--one side-->
+                        <div class="side flashcard">
+                          <div class="ui card">
+                            <div class="image">
+                              <img src="http://www.newyorker.com/wp-content/uploads/2014/08/Stokes-Hello-Kitty2-1200.jpg", width="50px">
+                            </div>
+                          </div>
+                        </div> <!--one side-->
+                      </div><!--sides-->
+                    </div><!--people-->
+                  </div> <!--flashcards deck-section -->
+                </div> <!--deck-section basic segment-->
+            </div> <!--yellow-->
+        </div> <!-- column -->
 
-  <div class="ui divider"></div>
+        <div class="sixteen wide column centered row pink">
+          <div class="basic segment deck-section">
+            <div class="ui form choice deck-section" id="flashcard-<%= index %>-choices">
+              <%= form_tag :study_sessions, method: :post, class: deck_word do %>
+                <%= radio_button_tag :choice, deck_word.word.pinyin, id: deck_word.word.pinyin %>
+                <%= label_tag :word, deck_word.word.pinyin %>
 
-  <div class="deck-section">
-    <div class="choice deck-section">
-        <li id="correct-choice">
-          <%= @word.pinyin %>
-        </li>
-    </div>
-  </div><!--deck-section-->
+                <%= radio_button_tag :choice, decoys(deck_word.word.simp).first.pinyin, id: decoys(deck_word.word.simp).first.pinyin  %>
+                <%= label_tag :word, decoys(deck_word.word.simp).first.pinyin %>
 
-</div>
+                <%= radio_button_tag :choice, decoys(deck_word.word.simp).last.pinyin, id: decoys(deck_word.word.simp).last.pinyin %>
+                <%= label_tag :word, decoys(deck_word.word.simp).last.pinyin %>
+                <%= hidden_field_tag :deck_word, deck_word  %>
+                <br>
+              <%= submit_tag "Next" %>
+            </div><!--deck-section-choices-->
+          </div><!--deck-section-->
+        </div> <!--column-->
+
+      </div> <!-- grid -->
+
+      <div class="ui divider"></div>
+
+    <% end %> <!-- end iteration -->
+  <% end %> <!-- end form -->
+
+</div> <!-- deck container-->
 
 <div class="ui container center aligned basic teal segment">
   <div id="overall progress tracker">
@@ -60,3 +82,6 @@
   Placeholder for chart
   </div>
 </div>
+
+
+<!-- put script tag and play around with jquery to score with localStorage -->

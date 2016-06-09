@@ -39,6 +39,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 
 gem 'semantic-ui-rails'
+gem 'newrelic_rpm'
 
 group :test do
   gem 'vcr'

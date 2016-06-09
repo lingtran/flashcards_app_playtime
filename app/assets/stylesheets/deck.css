@@ -4,5 +4,9 @@
 
 .deck-section {
   border: 5%;
-  padding: 1%
+  padding: 1%;
+}
+
+.ui.card {
+  text-align: center
 }

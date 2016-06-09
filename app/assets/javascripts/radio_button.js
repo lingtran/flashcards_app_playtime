@@ -24,24 +24,6 @@
 //= require semantic-ui/modules/video.js
 
 $(document).ready(function() {
-
-  var i = 0
-
-  while (i < 6) {
-    var flipOverButtonId = '#flip-over-button-' + i;
-    var flipBackButtonId = '#flip-back-button-' + i;
-    var flashcardId = '#flashcard-' + i;
-
-    $(animateShape(flipOverButtonId, flashcardId, 'flip over'));
-    $(animateShape(flipBackButtonId, flashcardId, 'flip back'));
-
-    i++;
-  };
-
-  function animateShape(directionalButtonId, flashcardId, direction) {
-    $(directionalButtonId).click(function(){
-      $(flashcardId).shape(direction);
-    })
-  };
-
+  $('.ui.radio.checkbox')
+  .checkbox()
 });
