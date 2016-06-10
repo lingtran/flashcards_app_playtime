@@ -9,14 +9,14 @@ RSpec.describe "oauth login", type: :feature do
       visit root_path
       click_link "Sign in with Facebook"
 
-      expect(page).to have_current_path flashcards_path
+      expect(page).to have_current_path flashcards_user_path(user)
       expect(page).to have_content "点心"
       expect(page).to have_content user.name
       expect(page).to have_link "Log Out"
 
       visit root_path
 
-      expect(page).to have_current_path flashcards_path
+      expect(page).to have_current_path flashcards_user_path(user)
     end
   end
 end

@@ -25,18 +25,35 @@
 
 $(document).ready(function() {
 
-  var i = 0
+    var flipUpButtonId = '#flip-up-button-0';
+    var flipDownButtonId = '#flip-down-button-0';
+    var flipRightButtonId = '#flip-right-button-0';
+    var flipLeftButtonId = '#flip-left-button-0';
+    var flashcardId = '#flashcard-0';
 
-  while (i < 6) {
-    var flipOverButtonId = '#flip-over-button-' + i;
-    var flipBackButtonId = '#flip-back-button-' + i;
-    var flashcardId = '#flashcard-' + i;
+    $(animateShape(flipUpButtonId, flashcardId, 'flip up'));
+    $(animateShape(flipDownButtonId, flashcardId, 'flip down'));
+    $(animateShape(flipRightButtonId, flashcardId, 'flip right'));
+    $(animateShape(flipLeftButtonId, flashcardId, 'flip left'));
 
-    $(animateShape(flipOverButtonId, flashcardId, 'flip over'));
-    $(animateShape(flipBackButtonId, flashcardId, 'flip back'));
+    informOfAction(flipUpButtonId);
+    informOfAction(flipDownButtonId);
+    informOfAction(flipRightButtonId);
+    informOfAction(flipLeftButtonId);
 
-    i++;
-  };
+  //
+  // var i = 0
+  //
+  // while (i < 6) {
+  //   var flipOverButtonId = '#flip-over-button-' + i;
+  //   var flipBackButtonId = '#flip-back-button-' + i;
+  //   var flashcardId = '#flashcard-' + i;
+  //
+  //   $(animateShape(flipOverButtonId, flashcardId, 'flip over'));
+  //   $(animateShape(flipBackButtonId, flashcardId, 'flip back'));
+  //
+  //   i++;
+  // };
 
   function animateShape(directionalButtonId, flashcardId, direction) {
     $(directionalButtonId).click(function(){
@@ -44,4 +61,7 @@ $(document).ready(function() {
     })
   };
 
+  function informOfAction(directionalButtonId) {
+    $(directionalButtonId).popup();
+  };
 });

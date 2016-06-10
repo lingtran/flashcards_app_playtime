@@ -15,29 +15,45 @@
 //= require_tree .
 
 $(document).ready(function(){
-  var i = 0;
-  localStorage.setItem('score', i);
-  var stored = localStorage.score;
-  $(scoreKeeper(i, stored));
+  if (localStorage.score ){
+    $("#score").text(localStorage.score);
+  } else {
+    $('.tally').hide();
+    localStorage.score = 0;
+  }
 
-  // $("#score").text(stored);
+  var currentScore = Number(localStorage.score);
+
+  scoreKeeper(currentScore);
 
 
-  function scoreKeeper(talliedScore, storedScore){
-    $('#next-card').click(function(){
-      // var choice = $('.radio_button').val();
-      // var correctChoice = $('#deck-word').val();
-      // if ( choice === correctChoice ){
-      //   talliedScore++ ;
-      //   $("#score").text(storedScore);
-      // } else {
-      //   $("#score").text(storedScore);
-      // };
+  function scoreKeeper(currentScore){
+    $('.submit-button').on('click', function(){
+      var choice = $(this).closest('form').find('input:checked').val();
+      var correctChoice = $('#deck-word').val();
+      if ( choice === correctChoice ){
+        currentScore+=1 ;
+        localStorage.score = currentScore;
+        $("#score").text(currentScore);
+      };
 
-      talliedScore++;
-      $('#score').text(storedScore);
     })
   };
+
+  $("#booyeah-done").on('click', function(){
+    // make AJAX call, pass it localStorage.score
+    // $.ajax({
+    //   method: "POST",
+    //   url: "/api1/v1/study_sessions/scores.json",
+    //   dataType: "JSON",
+    //   data: localStorage.score;
+    //   success: alert("Successfully saved your score")
+    // })
+
+    localStorage.clear();
+    $('.tally').hide();
+  })
+
 
 
 })

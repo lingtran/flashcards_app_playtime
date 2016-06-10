@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    redirect_to flashcards_path if current_user
+    redirect_to flashcards_user_path(current_user) if current_user
   end
 end

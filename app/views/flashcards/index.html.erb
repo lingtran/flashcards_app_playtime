@@ -1,7 +1,6 @@
-<!-- pass score from controller to view? -->
-  <!-- <div class="fake">
-    Score:<a id="score"></a>
-  <!-- </div> <!--experimenting with local storage-->
+  <div class="tally">
+    Tally of correct answers: <a id="score"></a>
+  </div>
 
 <div class="ui basic container center aligned basic teal segment" id="deck-container">
 
@@ -9,16 +8,22 @@
 
       <div class="ui three column centered grid">
         <div class="sixteen wide column centered row green">
-                <div class="basic segment deck-section">
-                  <div class="ui direction buttons deck-section">
-                    <button id="flip-over-button-<%= index %>" class="ui button" data-animation="flip" data-direction="over" title="Flip Over">
-                      Flip Card Over
-                    </button>
-                    <button id="flip-back-button-<%= index %>" class="ui button" data-animation="flip" data-direction="back" title="Flip Back">
-                      Flip Card Back
-                    </button>
-                  </div>
-                </div> <!-- buttons deck-section-->
+          <div class="basic segment deck-section">
+            <div class="ui direction buttons deck-section">
+              <button id="flip-left-button-<%= index %>" class="ui button" data-animation="flip" data-direction="left" title="Flip Left" data-content="Flip Left">
+                <i class="add icon arrow left icon"></i>
+              </button>
+              <button id="flip-up-button-<%= index %>" class="ui button" data-animation="flip" data-direction="up" title="Flip Up">
+                <i class="arrow up icon"></i>
+              </button>
+              <button id="flip-down-button-<%= index %>" class="ui button" data-animation="flip" data-direction="down" title="Flip down">
+                <i class="arrow down icon"></i>
+              </button>
+              <button id="flip-right-button-<%= index %>" class="ui button" data-animation="flip" data-direction="right" title="Flip Right">
+                <i class="arrow right icon"></i>
+              </button>
+            </div>
+          </div> <!-- buttons deck-section-->
         </div> <!-- column green -->
 
         <div class="sixteen wide column centered row blue">
@@ -38,14 +43,26 @@
                               </div>
                             </div>
                           </div>
-                        </div> <!--one side-->
+                        </div> <!--active side-->
                         <div class="side flashcard">
                           <div class="ui card">
                             <div class="image">
-                              <img src="http://www.newyorker.com/wp-content/uploads/2014/08/Stokes-Hello-Kitty2-1200.jpg", width="50px">
+                              <%= image_tag("http://www.newyorker.com/wp-content/uploads/2014/08/Stokes-Hello-Kitty2-1200.jpg") %>
                             </div>
                           </div>
-                        </div> <!--one side-->
+                        </div> <!--image side-->
+                        <div class="side flashcard">
+                          <div class="ui card">
+                            <div class="content">
+                              <div class="meta" id="flashcard-<%= index %>-definition">
+                                <a> Definition </a>
+                              </div>
+                              <div class="description">
+                                <%= deck_word.word.definition %>
+                              </div>
+                            </div>
+                          </div>
+                        </div> <!--definition side-->
                       </div><!--sides-->
                     </div><!--people-->
                   </div> <!--flashcards deck-section -->
@@ -57,22 +74,28 @@
           <div class="basic segment deck-section">
             <div class="ui form choice deck-section" id="flashcard-<%= index %>-choices">
               <%= form_tag :study_sessions, method: :post do %>
-                <%= radio_button_tag :choice, deck_word.word.pinyin, false, id: "deck-word" %>
-                <%= label_tag :word, deck_word.word.pinyin %>
+                <div class="ui radio checkbox">
+                  <%= radio_button_tag :choice, deck_word.word.pinyin, false, id: "deck-word" %>
+                  <%= label_tag :word, deck_word.word.pinyin %>
+                </div>
 
-                <%= radio_button_tag :choice, decoys(deck_word.word.simp).first.pinyin, false, id: "other-deck-word-one"  %>
-                <%= label_tag :word, decoys(deck_word.word.simp).first.pinyin %>
+                <div class="ui radio checkbox">
+                  <%= radio_button_tag :choice, decoys(deck_word.word.simp).first.pinyin, false, id: "other-deck-word-one"  %>
+                  <%= label_tag :word, decoys(deck_word.word.simp).first.pinyin %>
+                </div>
 
-                <%= radio_button_tag :choice, decoys(deck_word.word.simp).last.pinyin, false, id: "other-deck-word-two" %>
-                <%= label_tag :word, decoys(deck_word.word.simp).last.pinyin %>
+                <div class="ui radio checkbox">
+                  <%= radio_button_tag :choice, decoys(deck_word.word.simp).last.pinyin, false, id: "other-deck-word-two" %>
+                  <%= label_tag :word, decoys(deck_word.word.simp).last.pinyin %>
+                </div>
 
                 <%= hidden_field_tag :deck_word, deck_word.id  %>
                 <%= hidden_field_tag :index, index %>
                 <br></br>
                 <% if deck_word.id == @last_deck_word.id %>
-                  <%= submit_tag "Finish", id: "booyeah-done"%>
+                  <%= submit_tag "Finish", id: "booyeah-done", class: "submit-button ui teal button" %>
                 <% else %>
-                  <%= submit_tag "Next", id: "next-card" %>
+                  <%= submit_tag "Next", id: "next-card", class: "submit-button ui teal button" %>
                 <% end %>
               <% end %> <!-- end form -->
             </div><!--deck-section-choices-->
