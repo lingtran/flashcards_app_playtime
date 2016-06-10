@@ -41,6 +41,8 @@ gem 'omniauth-facebook'
 gem 'semantic-ui-rails'
 gem 'newrelic_rpm'
 
+gem 'will_paginate'
+
 group :test do
   gem 'vcr'
   gem 'webmock'

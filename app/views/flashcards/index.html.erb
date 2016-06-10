@@ -1,6 +1,11 @@
+<!-- pass score from controller to view? -->
+  <!-- <div class="fake">
+    Score:<a id="score"></a>
+  <!-- </div> <!--experimenting with local storage-->
+
 <div class="ui basic container center aligned basic teal segment" id="deck-container">
 
-    <% @deck_words.each_with_index do |deck_word, index| %>
+    <% @deck_words_per_page.each_with_index do |deck_word, index| %>
 
       <div class="ui three column centered grid">
         <div class="sixteen wide column centered row green">
@@ -14,7 +19,7 @@
                     </button>
                   </div>
                 </div> <!-- buttons deck-section-->
-        </div> <!-- column -->
+        </div> <!-- column green -->
 
         <div class="sixteen wide column centered row blue">
             <div class="column yellow">
@@ -45,35 +50,40 @@
                     </div><!--people-->
                   </div> <!--flashcards deck-section -->
                 </div> <!--deck-section basic segment-->
-            </div> <!--yellow-->
-        </div> <!-- column -->
+            </div> <!--column yellow-->
+        </div> <!-- column blue -->
 
         <div class="sixteen wide column centered row pink">
           <div class="basic segment deck-section">
             <div class="ui form choice deck-section" id="flashcard-<%= index %>-choices">
-              <%= form_tag :study_sessions, method: :post, class: deck_word do %>
-                <%= radio_button_tag :choice, deck_word.word.pinyin, id: deck_word.word.pinyin %>
+              <%= form_tag :study_sessions, method: :post do %>
+                <%= radio_button_tag :choice, deck_word.word.pinyin, false, id: "deck-word" %>
                 <%= label_tag :word, deck_word.word.pinyin %>
 
-                <%= radio_button_tag :choice, decoys(deck_word.word.simp).first.pinyin, id: decoys(deck_word.word.simp).first.pinyin  %>
+                <%= radio_button_tag :choice, decoys(deck_word.word.simp).first.pinyin, false, id: "other-deck-word-one"  %>
                 <%= label_tag :word, decoys(deck_word.word.simp).first.pinyin %>
 
-                <%= radio_button_tag :choice, decoys(deck_word.word.simp).last.pinyin, id: decoys(deck_word.word.simp).last.pinyin %>
+                <%= radio_button_tag :choice, decoys(deck_word.word.simp).last.pinyin, false, id: "other-deck-word-two" %>
                 <%= label_tag :word, decoys(deck_word.word.simp).last.pinyin %>
-                <%= hidden_field_tag :deck_word, deck_word  %>
-                <br>
-              <%= submit_tag "Next" %>
+
+                <%= hidden_field_tag :deck_word, deck_word.id  %>
+                <%= hidden_field_tag :index, index %>
+                <br></br>
+                <% if deck_word.id == @last_deck_word.id %>
+                  <%= submit_tag "Finish", id: "booyeah-done"%>
+                <% else %>
+                  <%= submit_tag "Next", id: "next-card" %>
+                <% end %>
+              <% end %> <!-- end form -->
             </div><!--deck-section-choices-->
           </div><!--deck-section-->
-        </div> <!--column-->
+        </div> <!--column pink-->
 
       </div> <!-- grid -->
 
       <div class="ui divider"></div>
 
     <% end %> <!-- end iteration -->
-  <% end %> <!-- end form -->
-
 </div> <!-- deck container-->
 
 <div class="ui container center aligned basic teal segment">

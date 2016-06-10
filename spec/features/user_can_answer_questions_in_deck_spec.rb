@@ -24,33 +24,24 @@ RSpec.describe "user goes through a deck", type: :feature do
       within("#flashcard-0-choices") do
         expect(page).to have_content word_one.pinyin
         expect(page).not_to have_content word_one.definition
-        choose("choice_dian3xin4_1_")
-        click_on ("Next")
+        choose("deck-word")
+        click_link_or_button ("Next")
       end
 
-      # user clicks on next arrow
-
-      # # second word
-      # within("#flashcards") do
-      #   expect(page).to have_content words.last.simp
-      #   expect(page).to have_content "Select the correct pinyin"
-      # end
-      #
-      # # user checks circle for incorrect answer to last word
-      # within(".choice deck-section") do
-      #   choose("#{wrong_choices.second.pinyin}")
-      # end
-      #
-      # # user clicks on next arrow
-      # click_link("Next")
+      within("#flashcard-0-choices") do
+        choose("other-deck-word-two")
+        click_link_or_button ("Finish")
+      end
 
       # score pops up, where score should be 1 out of 2 questions were correct
-      within(".score-popup") do
-        expect(page).to have_content "Score: 1 correct answer / 2 total cards in deck"
+      within("#flash_score_popup") do
+        expect(page).to have_content "Your score is 1"
       end
 
       # and when complete, will see a flash that says "Great work. You can try again!"
-      expect(page).to have_content "Great work. Keep at it!"
+      # expect(page).to have_content "Great work. Keep at it!"
     end
   end
 end
+
+# find(:xpath, "(//input[@type='checkbox'])[25]")

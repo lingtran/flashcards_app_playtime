@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :flashcards, only: [:index]
   resources :study_sessions, only: [:create]
+  get "/flashcards/card=:page", to: "flashcards#index", as: :flashcard_page
 
   get '/auth/facebook', as: :facebook_login
   get '/auth/failure', to: redirect('/')

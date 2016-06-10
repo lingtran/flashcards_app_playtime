@@ -14,13 +14,13 @@ RSpec.describe DeckWord, type: :model do
 
     it "finds the next deck word" do
       current_deck_word = DeckWord.find(2)
-      next_deck_word = DeckWord.find_next_for(current_deck_word)
+      next_deck_word = DeckWord.find_next_for(current_deck_word.id)
 
       expect(next_deck_word.id).to eq(3)
       expect(next_deck_word).not_to eq(current_deck_word)
 
       current_deck_word = DeckWord.find(3)
-      next_deck_word = DeckWord.find_next_for(current_deck_word)
+      next_deck_word = DeckWord.find_next_for(current_deck_word.id)
 
       expect(next_deck_word.id).to eq(3)
       expect(next_deck_word).to eq(current_deck_word)
