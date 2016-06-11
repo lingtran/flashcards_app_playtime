@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
       namespace :study_sessions do
-        resources :scores, only: [:create]
+        resources :scores, only: [:index, :create]
       end
     end
   end
