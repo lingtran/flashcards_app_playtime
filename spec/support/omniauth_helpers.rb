@@ -19,4 +19,10 @@ module OmniAuthHelpers
       }
       })
   end
+
+  def user_logs_in
+    set_user
+    visit root_path
+    click_link "Sign in with Facebook"
+  end
 end

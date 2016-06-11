@@ -6,7 +6,8 @@ RSpec.describe Question, type: :model do
   end
 
   context "associations" do
-    it { should have_many(:deck_words) }
-    it { should have_many(:words).through(:deck_words) }
+    it { should have_many(:deck_question_words) }
+    it { should have_many(:words).through(:deck_question_words) }
+    it { should have_many(:decks).through(:deck_question_words) }
   end
 end

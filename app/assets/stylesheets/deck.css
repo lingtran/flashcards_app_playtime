@@ -1,4 +1,35 @@
+/*card*/
 #deck-container {
-  border: 5%;
-  margin: 5%
+  margin: 2%;
+  border: 1%;
+}
+
+.deck-section {
+  border: 1%;
+  margin: 1%;
+  padding: 1%;
+}
+
+.ui.card {
+  text-align: center;
+}
+
+.ui.form.choice.deck-section{
+  font-weight: bolder;
+}
+
+.image{
+  width: 250px;
+  position: centered;
+}
+
+/*reveal score with progress*/
+.tally {
+  margin: 1%;
+  border: 1%;
+}
+
+/*choice radio buttons*/
+.ui.radio.checkbox{
+  padding-right: 5%;
 }

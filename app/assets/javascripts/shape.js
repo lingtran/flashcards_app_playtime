@@ -1,13 +1,67 @@
+//
+//= require jquery
+//= require jquery_ujs
+//= require_tree .
+
+//= require semantic-ui/modules/accordion.js
+//= require semantic-ui/modules/behavior/api.js
+//= require semantic-ui/modules/behavior/colorize.js
+//= require semantic-ui/modules/behavior/form.js
+//= require semantic-ui/modules/behavior/state.js
+//= require semantic-ui/modules/chatroom.js
+//= require semantic-ui/modules/checkbox.js
+//= require semantic-ui/modules/dimmer.js
+//= require semantic-ui/modules/dropdown.js
+//= require semantic-ui/modules/modal.js
+//= require semantic-ui/modules/nag.js
+//= require semantic-ui/modules/popup.js
+//= require semantic-ui/modules/rating.js
+//= require semantic-ui/modules/search.js
+//= require semantic-ui/modules/shape.js
+//= require semantic-ui/modules/sidebar.js
+//= require semantic-ui/modules/tab.js
+//= require semantic-ui/modules/transition.js
+//= require semantic-ui/modules/video.js
+
 $(document).ready(function() {
-  $(animateShape('#up-button', 'flip up'));
-  $(animateShape('#down-button', 'flip down'));
-  $(animateShape('#left-button', 'flip left'));
-  $(animateShape('#right-button', 'flip right'));
 
+    var flipUpButtonId = '#flip-up-button-0';
+    var flipDownButtonId = '#flip-down-button-0';
+    var flipRightButtonId = '#flip-right-button-0';
+    var flipLeftButtonId = '#flip-left-button-0';
+    var flashcardId = '#flashcard-0';
 
-  function animateShape(elementID, direction) {
-    $(elementID).click(function(){
-      $('.shape').shape(direction);
+    $(animateShape(flipUpButtonId, flashcardId, 'flip up'));
+    $(animateShape(flipDownButtonId, flashcardId, 'flip down'));
+    $(animateShape(flipRightButtonId, flashcardId, 'flip right'));
+    $(animateShape(flipLeftButtonId, flashcardId, 'flip left'));
+
+    informOfAction(flipUpButtonId);
+    informOfAction(flipDownButtonId);
+    informOfAction(flipRightButtonId);
+    informOfAction(flipLeftButtonId);
+
+  //
+  // var i = 0
+  //
+  // while (i < 6) {
+  //   var flipOverButtonId = '#flip-over-button-' + i;
+  //   var flipBackButtonId = '#flip-back-button-' + i;
+  //   var flashcardId = '#flashcard-' + i;
+  //
+  //   $(animateShape(flipOverButtonId, flashcardId, 'flip over'));
+  //   $(animateShape(flipBackButtonId, flashcardId, 'flip back'));
+  //
+  //   i++;
+  // };
+
+  function animateShape(directionalButtonId, flashcardId, direction) {
+    $(directionalButtonId).click(function(){
+      $(flashcardId).shape(direction);
     })
+  };
+
+  function informOfAction(directionalButtonId) {
+    $(directionalButtonId).popup();
   };
 });

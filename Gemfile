@@ -34,11 +34,18 @@ gem 'unicorn'
 gem 'rails_12factor', group: :production
 
 gem 'figaro'
-gem 'faraday'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+gem 'faraday'
+gem 'responders', '~> 2.0'
+gem 'active_model_serializers', github: "rails-api/active_model_serializers"
+
 gem 'semantic-ui-rails'
+gem 'will_paginate'
+
+gem 'newrelic_rpm'
+
 
 group :test do
   gem 'vcr'
