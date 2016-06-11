@@ -1,7 +1,6 @@
 class StudySessionsController < ApplicationController
   def create
     # need major refactor
-
     deck_word = DeckQuestionWord.find(params[:deck_word].to_i)
     answer_correct = params[:choice] == deck_word.word.pinyin
     last_deck_word = current_deck.last
