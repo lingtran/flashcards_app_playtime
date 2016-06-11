@@ -13,7 +13,9 @@ class StudySessionsController < ApplicationController
       redirect_to flashcard_page_user_path(current_user, page: next_word.id)
     elsif deck_word.id == last_deck_word.id
       session[:tallied_score] += 1 if answer_correct
+# trigger service to internal api
 
+      # want to redirect_to flashcard_score_path(current_user)?
       redirect_to flashcards_user_path(current_user)
 
       flash[:score_popup] = "Your score is #{session[:tallied_score]}"
