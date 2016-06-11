@@ -1,6 +1,7 @@
 class Api::V1::StudySessions::ScoresController < Api::ApiController
   def create
-    # takes score and stores it
-    # params: deck,
+    # params: deck, user, score, timestamp
+    # create deck
+    # create studysession with user, deck, score 
   end
 end

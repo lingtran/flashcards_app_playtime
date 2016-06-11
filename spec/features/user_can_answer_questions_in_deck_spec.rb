@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "user goes through a deck", type: :feature do
   VCR.use_cassette "logged_in#user_goes_through_deck" do
     scenario "user can answer questions in a deck" do
-      word_one, word_two = create_list(:deck_word, 2)
+      word_one, word_two = create_list(:deck_question_word, 2)
       word_one = word_one.word
       word_two = word_two.word
       nonincluded_word = create(:word)

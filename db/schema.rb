@@ -11,22 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608180518) do
+ActiveRecord::Schema.define(version: 20160611075756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "deck_words", force: :cascade do |t|
-    t.integer  "deck_id"
-    t.integer  "word_id"
+  create_table "deck_question_words", force: :cascade do |t|
     t.integer  "question_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "word_id"
+    t.integer  "deck_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "is_correct",  default: 0
+    t.integer  "level",       default: 0
   end
 
-  add_index "deck_words", ["deck_id"], name: "index_deck_words_on_deck_id", using: :btree
-  add_index "deck_words", ["question_id"], name: "index_deck_words_on_question_id", using: :btree
-  add_index "deck_words", ["word_id"], name: "index_deck_words_on_word_id", using: :btree
+  add_index "deck_question_words", ["deck_id"], name: "index_deck_question_words_on_deck_id", using: :btree
+  add_index "deck_question_words", ["question_id"], name: "index_deck_question_words_on_question_id", using: :btree
+  add_index "deck_question_words", ["word_id"], name: "index_deck_question_words_on_word_id", using: :btree
 
   create_table "decks", force: :cascade do |t|
     t.string   "name"
@@ -36,8 +38,9 @@ ActiveRecord::Schema.define(version: 20160608180518) do
 
   create_table "questions", force: :cascade do |t|
     t.text     "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "focus_area", default: 0
   end
 
   create_table "study_sessions", force: :cascade do |t|
@@ -82,9 +85,9 @@ ActiveRecord::Schema.define(version: 20160608180518) do
   add_index "words", ["simp"], name: "ix_simp", using: :btree
   add_index "words", ["trad"], name: "ix_trad", using: :btree
 
-  add_foreign_key "deck_words", "decks"
-  add_foreign_key "deck_words", "questions"
-  add_foreign_key "deck_words", "words"
+  add_foreign_key "deck_question_words", "decks"
+  add_foreign_key "deck_question_words", "questions"
+  add_foreign_key "deck_question_words", "words"
   add_foreign_key "study_sessions", "user_decks"
   add_foreign_key "user_decks", "decks"
   add_foreign_key "user_decks", "users"

@@ -1,10 +1,20 @@
 FactoryGirl.define do
   factory :question do
     name "Select the correct pinyin"
+    focus_area 0
+
+    trait :definition_question do
+      name "Select the correct definition"
+      focus_area 1
+    end
   end
 
   factory :deck do
-    name "Test Deck"
+    name "Test Pinyin Deck"
+
+    trait :definition_deck do
+      name "Test Definition Deck"
+    end
   end
 
   factory :word do
@@ -23,9 +33,23 @@ FactoryGirl.define do
     factory :decoys, traits: [:decoy_words]
   end
 
-  factory :deck_word do
+  factory :deck_question_word do
     deck { Deck.first || association(:deck) }
     association(:word)
     question { Question.first || association(:question) }
+    is_correct 0
+    level 0
+
+    trait :novice do
+      0
+    end
+
+    trait :badass_in_training_level do
+      level 1
+    end
+
+    trait :master_level do
+      level 2
+    end
   end
 end
