@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_deck
-    @current_deck ||= DeckQuestionWord.where(question_id: 1).limit(7)
+    @current_deck ||= Deck.find(params[:deck_id]).deck_question_words.where(deck_question_words: {question_id: 2})
   end
 end
