@@ -17,6 +17,30 @@ FactoryGirl.define do
     end
   end
 
+  factory :user_deck do
+    deck 1
+    user 1
+  end
+
+  factory :study_session do
+    user_deck { UserDeck.first || association(:user_deck) }
+    score 2
+    date "2016-06-08 12:05:18"
+    weight 2
+
+    trait :badass_in_training_score_weight do
+      weight 2
+    end
+
+    trait :novice_score_weight do
+      weight 1
+    end
+
+    trait :master_score_weight do
+      weight 3
+    end
+  end
+
   factory :word do
     sequence(:trad) { |n| "點心(#{n})" }
     sequence(:simp) { |n| "点心(#{n})" }
