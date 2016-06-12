@@ -9,15 +9,15 @@ RSpec.describe "user goes through a deck", type: :feature do
       create(:deck_question_word, deck_id: deck.id, question_id: question.id, word_id: word_one.id)
       create(:deck_question_word, deck_id: deck.id, question_id: question.id, word_id: word_two.id)
       nonincluded_word = create(:word)
+      set_user
 
-
-      user = set_user
       visit root_path
       click_link "Sign in with Facebook"
       click_link "#{deck.name}"
 
       within("#flashcard-0-header") do
         expect(page).to have_content word_one.simp
+        expect(page).not_to have_content nonincluded_word.simp
       end
 
       within("#flashcard-0-question") do
