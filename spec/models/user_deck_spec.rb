@@ -7,14 +7,19 @@ RSpec.describe UserDeck, type: :model do
     it { is_expected.to have_many(:study_sessions) }
   end
 
-  context "#weighted_average_score" do
-    # create user
-    # create study session
-    # create user deck for each level
-    # formula for weighted average...along the lines of (weight*score1, weight*score2)/(sum of weights)
-    # StudySession (weight, score)
-    # user_deck = UserDeck.find_by(user_id, deck_id)
-    # user_deck.average_score =
-      # study_session.select(:score).group(:weight)
+  context "#weighted_score_over_time" do
+    it "can calculate the weighted average of a user deck over time" do
+      user = create(:user)
+      deck = create(:deck)
+      user_deck = create(:user_deck, user_id: user.id, deck_id: deck.id)
+      create_list(:study_session, 2, :badass_in_training_score_weight, user_deck_id: user_deck.id)
+      create_list(:study_session, 2, user_deck_id: user_deck.id)
+      create(:study_session, :master_score_weight, user_deck_id: user_deck.id)
+
+
+      avg_score = user_deck.weighted_score_over_time
+
+      expect(avg_score).to eq(5)
+    end
   end
 end

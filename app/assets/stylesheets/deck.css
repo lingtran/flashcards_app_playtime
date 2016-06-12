@@ -1,11 +1,9 @@
 /*card*/
 #deck-container {
   margin: 2%;
-  border: 1%;
 }
 
 .deck-section {
-  margin: 1%;
   padding: 1%;
 }
 

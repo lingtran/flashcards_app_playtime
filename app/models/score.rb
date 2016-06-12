@@ -1,8 +1,12 @@
 class Score
   def self.record(deck, user, score)
     weight = assign_weight(score)
-    user_deck = UserDeck.find_or_create_by(deck_id: deck.id, user_id: user.id)
-    StudySession.create( date: Time.now, user_deck_id: user_deck.id, score: score, weight: weight )
+    user_deck = UserDeck.find_or_create_by( deck_id: deck.id,
+                                            user_id: user.id )
+    StudySession.create( date: Time.now,
+                         user_deck_id: user_deck.id,
+                         score: score,
+                         weight: weight )
   end
 
   def self.assign_weight(score)

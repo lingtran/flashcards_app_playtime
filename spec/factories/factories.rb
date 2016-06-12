@@ -30,19 +30,28 @@ FactoryGirl.define do
 
   factory :study_session do
     association(:user_deck)
-    score 2
+    score 5
     date "2016-06-08 12:05:18"
     weight 2
 
     trait :badass_in_training_score_weight do
+      association(:user_deck)
+      score 4
+      date "2016-06-08 12:05:18"
       weight 2
     end
 
     trait :novice_score_weight do
+      association(:user_deck)
+      score 2
+      date "2016-06-08 12:05:18"
       weight 1
     end
 
     trait :master_score_weight do
+      association(:user_deck)
+      score 7
+      date "2016-06-08 12:05:18"
       weight 3
     end
   end
