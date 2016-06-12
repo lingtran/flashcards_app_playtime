@@ -14,7 +14,7 @@ class StudySessionsController < ApplicationController
     elsif deck_word.id == last_deck_word.id
       session[:tallied_score] += 1 if answer_correct
 
-      Score.record(current_deck, current_user, session[:tallied_score])
+      Score.record(deck_word.deck, current_user, session[:tallied_score])
 
       redirect_to flashcards_user_path(current_user)
 
