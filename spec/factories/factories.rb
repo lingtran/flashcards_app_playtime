@@ -24,12 +24,12 @@ FactoryGirl.define do
   end
 
   factory :user_deck do
-    deck 1
-    user 1
+    association(:deck)
+    association(:user)
   end
 
   factory :study_session do
-    user_deck { UserDeck.first || association(:user_deck) }
+    association(:user_deck)
     score 2
     date "2016-06-08 12:05:18"
     weight 2
