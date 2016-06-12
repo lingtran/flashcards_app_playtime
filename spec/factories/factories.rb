@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :user do
+    sequence(:email) { |n| "dev#{n}@imagination.org" }
+    password "password"
+    provider "lingoapp"
+  end
+
   factory :question do
     name "Select the correct pinyin"
     focus_area 0

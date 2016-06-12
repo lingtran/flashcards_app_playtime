@@ -12,11 +12,11 @@ RSpec.describe User, type: :model do
   end
 
   context "validations" do
-    it { should validate_presence_of(:uid) }
     it { should validate_presence_of(:provider) }
     it { should validate_presence_of(:email) }
-    it { should validate_presence_of(:oauth_token) }
 
+    it { should_not validate_presence_of(:uid) }
+    it { should_not validate_presence_of(:oauth_token) }
     it { should_not validate_presence_of(:name) }
     it { should_not validate_presence_of(:oauth_expires_at) }
     it { should_not validate_presence_of(:graph) }

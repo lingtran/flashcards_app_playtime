@@ -22,6 +22,7 @@ class StudySessionsController < ApplicationController
       flash[:encouragement] = "Have another go at it"
     else
       session[:tallied_score] += 1 if answer_correct
+
       redirect_to flashcard_page_user_path(current_user, page: next_word.id)
     end
   end

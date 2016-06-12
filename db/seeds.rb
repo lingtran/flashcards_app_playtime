@@ -1,11 +1,30 @@
 class Seed
-  attr_reader :pinyin_question, :definition_question, :pinyin_deck, :definition_deck, :novice_words, :badass_in_training_words, :master_words
+  attr_reader :pinyin_question,
+              :definition_question,
+              :pinyin_deck,
+              :definition_deck,
+              :novice_words,
+              :badass_in_training_words,
+              :master_words,
+              :first_user,
+              :second_user,
+              :third_user,
+              :first_user_deck_def,
+              :first_user_deck_pinyin,
+              :second_user_deck_def,
+              :second_user_deck_pinyin,
+              :third_user_deck_pinyin
 
   def self.start
     seed = Seed.new
 
+    seed.generate_users
     seed.generate_questions
     seed.generate_decks
+    seed.generate_user_decks
+    seed.generate_study_sessions_for_first_user
+    seed.generate_study_sessions_for_second_user
+    seed.generate_study_sessions_for_third_user
     seed.generate_words
     seed.generate_deck_question_words_novice_for_pinyin
     seed.generate_deck_question_words_badass_in_training_for_pinyin
@@ -13,6 +32,13 @@ class Seed
     seed.generate_deck_question_words_novice_for_definition
     seed.generate_deck_question_words_badass_in_training_for_definition
     seed.generate_deck_question_words_master_for_definition
+  end
+
+  def generate_users
+    3.times do |n|
+      User.create(email: "user#{n}@lingoapp.fake", password: "password", provider: "lingoapp")
+    end
+    puts "Generate users"
   end
 
   def generate_questions
@@ -25,6 +51,72 @@ class Seed
     @pinyin_deck = Deck.create(name: "Pinyin")
     @definition_deck = Deck.create(name: "Definition")
     puts "Generate decks"
+  end
+
+  def generate_user_decks
+    @first_user = User.find(1)
+    @second_user = User.find(2)
+    @third_user = User.find(3)
+
+    @first_user_deck_pinyin = UserDeck.create(user_id: first_user.id, deck_id: @pinyin_deck.id )
+    @first_user_deck_def = UserDeck.create(user_id: first_user.id, deck_id: @definition_deck.id )
+    @second_user_deck_pinyin = UserDeck.create(user_id: second_user.id, deck_id: @pinyin_deck.id )
+    @second_user_deck_def = UserDeck.create(user_id: second_user.id, deck_id: @definition_deck.id )
+    @third_user_deck_pinyin = UserDeck.create(user_id: third_user.id, deck_id: @pinyin_deck.id )
+    puts "Generate user decks"
+  end
+
+  def generate_study_sessions_for_first_user
+    weights = [0, 1, 2]
+    scores = [0, 1, 2, 3, 4, 5, 6, 7]
+    dates = { most_recent: "2016-06-08 12:05:18", three_days_later: "2016-06-11 06:05:18", next_day: "2016-06-09 09:05:18"}
+    decks = [first_user_deck_def, first_user_deck_pinyin]
+
+    20.times do
+      score = scores.shuffle.sample
+      weight = weights.shuffle.sample
+      date = dates.values.shuffle.sample
+      deck_id = decks.shuffle.sample.id
+
+      StudySession.create( date: date, user_deck_id: deck_id, score: score, weight: weight )
+    end
+
+    puts "Generate study sessions for first user"
+  end
+
+  def generate_study_sessions_for_second_user
+    weights = [0, 1, 2]
+    scores = [0, 1, 2, 3, 4, 5, 6, 7]
+    dates = { most_recent: "2016-06-11 12:05:18", three_days_later: "2016-06-14 06:05:18", next_day: "2016-06-10 09:05:18"}
+    decks = [second_user_deck_def, second_user_deck_pinyin]
+
+    40.times do
+      score = scores.shuffle.sample
+      weight = weights.shuffle.sample
+      date = dates.values.shuffle.sample
+      deck_id = decks.shuffle.sample.id
+
+      StudySession.create( date: date, user_deck_id: deck_id, score: score, weight: weight )
+    end
+
+    puts "Generate study sessions for second user"
+  end
+
+  def generate_study_sessions_for_third_user
+    weights = [0, 1, 2]
+    scores = [0, 1, 2, 3, 4, 5, 6, 7]
+    dates = { most_recent: "2016-06-11 12:05:18", three_days_later: "2016-06-14 06:05:18", next_day: "2016-06-10 09:05:18"}
+    deck_id = third_user_deck_pinyin.id
+
+    50.times do
+      score = scores.shuffle.sample
+      weight = weights.shuffle.sample
+      date = dates.values.shuffle.sample
+
+      StudySession.create( date: date, user_deck_id: deck_id, score: score, weight: weight )
+    end
+
+    puts "Generate study sessions for third user"
   end
 
   def generate_words
