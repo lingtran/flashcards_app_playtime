@@ -24,30 +24,6 @@
 //= require semantic-ui/modules/video.js
 
 $(document).ready(function() {
-
-    var flipUpButtonId = '#flip-up-button-0';
-    var flipDownButtonId = '#flip-down-button-0';
-    var flipRightButtonId = '#flip-right-button-0';
-    var flipLeftButtonId = '#flip-left-button-0';
-    var flashcardId = '#flashcard-0';
-
-    $(animateShape(flipUpButtonId, flashcardId, 'flip up'));
-    $(animateShape(flipDownButtonId, flashcardId, 'flip down'));
-    $(animateShape(flipRightButtonId, flashcardId, 'flip right'));
-    $(animateShape(flipLeftButtonId, flashcardId, 'flip left'));
-
-    informOfAction(flipUpButtonId);
-    informOfAction(flipDownButtonId);
-    informOfAction(flipRightButtonId);
-    informOfAction(flipLeftButtonId);
-
-  function animateShape(directionalButtonId, flashcardId, direction) {
-    $(directionalButtonId).click(function(){
-      $(flashcardId).shape(direction);
-    })
-  };
-
-  function informOfAction(directionalButtonId) {
-    $(directionalButtonId).popup();
-  };
+  $('.ui.radio.checkbox')
+  .checkbox()
 });

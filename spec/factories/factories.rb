@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :user do
+    sequence(:email) { |n| "dev#{n}@imagination.org" }
+    password "password"
+    provider "lingoapp"
+  end
+
   factory :question do
     name "Select the correct pinyin"
     focus_area 0
@@ -14,6 +20,39 @@ FactoryGirl.define do
 
     trait :definition_deck do
       name "Test Definition Deck"
+    end
+  end
+
+  factory :user_deck do
+    association(:deck)
+    association(:user)
+  end
+
+  factory :study_session do
+    association(:user_deck)
+    score 5
+    date "2016-06-08 12:05:18"
+    weight 2
+
+    trait :badass_in_training_score_weight do
+      association(:user_deck)
+      score 4
+      date "2016-06-08 12:05:18"
+      weight 2
+    end
+
+    trait :novice_score_weight do
+      association(:user_deck)
+      score 2
+      date "2016-06-08 12:05:18"
+      weight 1
+    end
+
+    trait :master_score_weight do
+      association(:user_deck)
+      score 7
+      date "2016-06-08 12:05:18"
+      weight 3
     end
   end
 

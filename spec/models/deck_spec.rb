@@ -8,6 +8,7 @@ RSpec.describe Deck, type: :model do
   context "association" do
     it { should have_many(:user_decks) }
     it { should have_many(:users).through(:user_decks) }
+
     it { should have_many(:deck_question_words) }
     it { should have_many(:words).through(:deck_question_words) }
     it { should have_many(:questions).through(:deck_question_words) }

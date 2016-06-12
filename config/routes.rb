@@ -13,12 +13,4 @@ Rails.application.routes.draw do
   get '/auth/failure', to: redirect('/')
   get '/auth/facebook/callback', to: "sessions#create"
   delete '/logout', to: "sessions#destroy", as: :logout
-
-  namespace :api, defaults: {format: :json} do
-    namespace :v1 do
-      namespace :study_sessions do
-        resources :scores, only: [:index, :create]
-      end
-    end
-  end
 end

@@ -26,7 +26,6 @@ $(document).ready(function(){
 
   scoreKeeper(currentScore);
 
-
   function scoreKeeper(currentScore){
     $('.submit-button').on('click', function(){
       var choice = $(this).closest('form').find('input:checked').val();

@@ -46,7 +46,6 @@ gem 'will_paginate'
 
 gem 'newrelic_rpm'
 
-
 group :test do
   gem 'vcr'
   gem 'webmock'

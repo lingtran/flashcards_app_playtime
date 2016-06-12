@@ -1,12 +1,11 @@
 class User < ActiveRecord::Base
+  # has_secure_password
+
   has_many :user_decks
   has_many :decks, through: :user_decks
 
-  validates :uid, presence: true
   validates :provider, presence: true
   validates :email, presence: true
-  validates :oauth_token, presence: true
-
 
   def self.from_omniauth(auth_hash)
     user = find_or_create_by(uid: auth_hash[:uid])
@@ -23,3 +22,6 @@ class User < ActiveRecord::Base
     user
   end
 end
+
+# validates :email, presence: true, uniqueness: true
+# validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
