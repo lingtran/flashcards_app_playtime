@@ -6,4 +6,11 @@ RSpec.describe UserDeck, type: :model do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to have_many(:study_sessions) }
   end
+
+  context "#weighted_average_score" do
+    # create user
+    # create study session
+    # create user deck for each level
+    # when 
+  end
 end

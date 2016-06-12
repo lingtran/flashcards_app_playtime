@@ -7,7 +7,7 @@
     <% @deck_words_per_page.each_with_index do |deck_word, index| %>
 
       <div class="ui three column centered grid">
-        <div class="sixteen wide column centered row green">
+        <div class="sixteen wide column centered row"> <!--debug with green-->
           <div class="basic segment deck-section">
             <div class="ui direction buttons deck-section">
               <button id="flip-left-button-<%= index %>" class="ui button" data-animation="flip" data-direction="left" title="Flip Left" data-content="Flip Left">
@@ -26,8 +26,8 @@
           </div> <!-- buttons deck-section-->
         </div> <!-- column green -->
 
-        <div class="sixteen wide column centered row blue">
-            <div class="column yellow">
+        <div class="sixteen wide column centered row">
+            <div class="column"> <!--debug with yellow-->
                 <div class="basic segment deck-section">
                   <div class="ui people shape" id="flashcard-<%= index %>">
                     <div class="ui people shape deck-section">
@@ -70,7 +70,7 @@
             </div> <!--column yellow-->
         </div> <!-- column blue -->
 
-        <div class="sixteen wide column centered row pink">
+        <div class="sixteen wide column centered row"><!--debug with pink-->
           <div class="basic segment deck-section">
             <div class="ui form choice deck-section" id="flashcard-<%= index %>-choices">
               <%= form_tag :study_sessions, method: :post do %>
