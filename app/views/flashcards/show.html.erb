@@ -5,7 +5,6 @@
 <div class="ui basic container center aligned basic teal segment" id="deck-container">
 
     <% @deck_words_per_page.each_with_index do |deck_word, index| %>
-
       <div class="ui three column centered grid">
         <div class="sixteen wide column centered row"> <!--debug with green-->
           <div class="basic segment deck-section">
@@ -39,7 +38,7 @@
                                 <%= deck_word.word.simp %>
                               </div>
                               <div class="meta" id="flashcard-<%= index %>-question">
-                                <a> Select the correct pinyin </a>
+                                <%= deck_word.question.name %>
                               </div>
                             </div>
                           </div>
@@ -90,9 +89,10 @@
                 </div>
 
                 <%= hidden_field_tag :deck_word, deck_word.id  %>
+                <%= hidden_field_tag :deck_id, deck_word.deck.id %>
                 <%= hidden_field_tag :index, index %>
                 <br></br>
-                <% if deck_word. == current_deck.last %>
+                <% if deck_word == current_deck.last %>
                   <%= submit_tag "Finish", id: "booyeah-done", class: "submit-button ui teal button" %>
                 <% else %>
                   <%= submit_tag "Next", id: "next-card", class: "submit-button ui teal button" %>
@@ -108,6 +108,6 @@
     <% end %> <!-- end iteration -->
 </div> <!-- deck container-->
 
-<div class="ui container center aligned basic teal segment">
+<div class="ui container center aligned basic teal segment" id="deck-stats">
 <%= render partial: 'scores_across_users_chart' %>
 </div>   <!-- report performance across decks -->

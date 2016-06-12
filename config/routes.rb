@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :user, only: [:show] do
     member do
       get '/flashcards', to: "flashcards#index", as: :flashcards
-      get 'flashcards/:deck_id', to: 'flashcards#show', as: :flashcard
+      get '/flashcards/:deck_id', to: 'flashcards#show', as: :flashcard
       resources :study_sessions, only: [:create]
       get '/flashcards/:deck_id/card=:page', to: "flashcards#show", as: :flashcard_page
     end

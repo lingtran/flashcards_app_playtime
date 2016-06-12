@@ -17,8 +17,9 @@
 $(document).ready(function(){
   if (localStorage.score ){
     $("#score").text(localStorage.score);
+    $('#series_chart_div').hide();
   } else {
-    $('.tally').hide();
+    $('.tally.ui').hide();
     localStorage.score = 0;
   }
 
@@ -48,12 +49,17 @@ $(document).ready(function(){
     //   data: localStorage.score;
     //   success: alert("Successfully saved your score")
     // })
+    $('#deck-stats').show();
 
     localStorage.clear();
     $('.tally').hide();
+  });
+
+  $("#home-link").on('click', function(){
+    if (localStorage.score){
+      localStorage.clear();
+  }
   })
-
-
 
 })
 
