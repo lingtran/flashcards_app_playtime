@@ -25,10 +25,16 @@
       // do I change the url to production link?
        var jsonData = $.ajax({
          method: GET,
-         url: 'api/v1/user/1/scores.json?deck_id=1',
+         url: 'api/v1/user/1/scores?deck_id=1',
          dataType: "JSON";
-         data: getData,
          async: false,
+         success: function(getData){
+           $('#series_chart_div').append(
+             "<div class='get-scores'>" + getData.description +"</div>"
+           )
+         }, debugger;
+         error: function(errorBody){
+               console.log(errorResponse, responseText);
        }).responseText;
 
  // need to check how that comes back
