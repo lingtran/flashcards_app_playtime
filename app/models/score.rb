@@ -1,12 +1,23 @@
 class Score
   def self.record(deck, user, score)
     weight = assign_weight(score)
+
     user_deck = UserDeck.find_or_create_by( deck_id: deck.id,
                                             user_id: user.id )
+
     StudySession.create( date: Time.now,
                          user_deck_id: user_deck.id,
                          score: score,
                          weight: weight )
+
+    new_avg_score = user_deck.weighted_score_over_time
+    level = assign_weight(new_avg_score)
+    study_rate = user_deck.calculate_study_rate_per_week
+
+    user_deck.update( average_deck_score: new_avg_score,
+                      mastery_level: level,
+                      study_rate_per_week: study_rate)
+    user_deck
   end
 
   def self.assign_weight(score)

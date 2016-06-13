@@ -11,4 +11,10 @@ class UserDeck < ActiveRecord::Base
   def self.weighted_score_across_users_over_time
     joins(:study_sessions).sum("score * weight")/joins(:study_sessions).sum("weight")
   end
+
+  def calculate_study_rate_per_week
+    # double check if this is the best approach
+    (study_sessions.count/7.to_f).round(3)
+  end
+
 end

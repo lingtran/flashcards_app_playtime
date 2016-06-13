@@ -12,7 +12,6 @@ class StudySessionsController < FlashcardsController
       session[:tallied_score] += 1 if answer_correct
 
       redirect_to flashcard_page_user_path(current_user, params[:deck_id], page: current_deck.index(next_word)+1)
-      # redirect_to flashcard_user_path(current_user, next_word.id)
     elsif deck_word.id == last_deck_word.id
       session[:tallied_score] += 1 if answer_correct
 
