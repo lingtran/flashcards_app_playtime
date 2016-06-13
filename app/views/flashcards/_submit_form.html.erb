@@ -1,0 +1,18 @@
+<div class="sixteen wide column centered row"><!--debug with pink-->
+  <div class="basic segment deck-section">
+    <div class="ui form choice deck-section" id="flashcard-<%= index %>-choices">
+      <%= form_tag :study_sessions, method: :post do %>
+
+        <%= render partial: 'question_choices', locals: { deck_word: deck_word } %>
+        <%= render partial: 'tags', locals: { deck_word: deck_word, index: index } %>
+
+        <br></br>
+        <% if deck_word == current_deck.last %>
+          <%= submit_tag "Finish", id: "booyeah-done", class: "submit-button ui teal button" %>
+        <% else %>
+          <%= submit_tag "Next", id: "next-card", class: "submit-button ui teal button" %>
+        <% end %>
+      <% end %> <!-- end form -->
+    </div><!--deck-section-choices-->
+  </div><!--deck-section-->
+</div> <!--column pink-->
