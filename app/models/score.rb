@@ -9,12 +9,12 @@ class Score
                          user_deck_id: user_deck.id,
                          score: score,
                          weight: weight )
-
     new_avg_score = user_deck.weighted_score_over_time
     level = assign_weight(new_avg_score)
 
     user_deck.update( average_deck_score: new_avg_score,
                       mastery_level: level)
+    user_deck
   end
 
   def self.assign_weight(score)

@@ -6,6 +6,7 @@ class UserDeck < ActiveRecord::Base
   belongs_to :user
 
   # set an after create or update call to update tier based on weighted score for user
+  after_update :calculate_study_rate_per_week
 
   def weighted_score_over_time
     study_sessions.sum("score * weight")/study_sessions.sum("weight")
@@ -15,10 +16,11 @@ class UserDeck < ActiveRecord::Base
     joins(:study_sessions).sum("score * weight")/joins(:study_sessions).sum("weight")
   end
 
-  # def self.weighted_score_over_time_for_deck(deck_id)
-  # test scope
-  #   found_deck
-  # end
-# add method study rate per week
+  private
+
+    def calculate_study_rate_per_week
+      # double check if this is the best approach
+      (study_sessions.count/7.to_f).round(3)
+    end
 
 end
