@@ -3,15 +3,21 @@ require 'rails_helper'
 RSpec.describe "user goes through a deck", type: :feature do
   VCR.use_cassette "logged_in#user_goes_through_deck" do
     scenario "user can answer questions in a deck" do
-      word_one, word_two = create_list(:deck_question_word, 2)
-      word_one = word_one.word
-      word_two = word_two.word
+      deck = create(:deck)
+      question = create(:question)
+      word_one, word_two = create_list(:word, 2)
+      create(:deck_question_word, deck_id: deck.id, question_id: question.id, word_id: word_one.id)
+      create(:deck_question_word, deck_id: deck.id, question_id: question.id, word_id: word_two.id)
       nonincluded_word = create(:word)
+      set_user
 
-      user = user_logs_in
+      visit root_path
+      click_link "Sign in with Facebook"
+      click_link "#{deck.name}"
 
       within("#flashcard-0-header") do
         expect(page).to have_content word_one.simp
+        expect(page).not_to have_content nonincluded_word.simp
       end
 
       within("#flashcard-0-question") do
