@@ -10,59 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/components/button.min.css">
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags%>
-
-<!--Google Charts sample-->
-  <!-- load the API -->
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-     <script type="text/javascript">
-       google.charts.load('current', {'packages':['corechart']});
-       google.charts.setOnLoadCallback(drawSeriesChart);
-
-     function drawSeriesChart() {
-      //  need to grab user_id and deck_id dynamically - call on elements?
-      // do I change the url to production link?
-       var jsonData = $.ajax({
-         method: GET,
-         url: 'api/v1/user/1/scores?deck_id=1',
-         dataType: "JSON";
-         async: false,
-         success: function(jsonData){
-           $('#series_chart_div').append(
-             "<div class='get-scores'>" + jsonData.description +"</div>"
-           )
-         },
-         error: function(errorBody){
-               console.log(errorResponse, responseText);
-       }).responseText;
-
- // need to check how that comes back
-       var data = google.visualization.arrayToDataTable(jsonData);
-
-      //  var data = google.visualization.arrayToDataTable([
-      //    ['ID', 'Average Deck Score', 'Study Rate Per Week', 'Mastery Level'],
-      //    ['BFRANK',    2.5,              1,      'Novice'],
-      //    ['HKITTY',    5,              1.3,      'Badass-in-Training'],
-      //    ['BSAUR',    7,               1.84,      'Badass'],
-      //    ['ATURING',    3.4,              2.78,   'Badass-in-Training'],
-      //    ['JCLARK',    7,              2,         'Badass'],
-      //    ['ME',    7,              6,      'Badass']
-      //  ]);
-
-       var options = {
-         title: 'Lingo App Users ' +
-                '- How are they faring?',
-         hAxis: {title: 'Average Deck Score'},
-         vAxis: {title: 'Study Rate Per Week'},
-         bubble: {textStyle: {fontSize: 11}}
-       };
-
-       var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
-       chart.draw(data, options);
-     }
-     </script>
-
 </head>
 <body>
   <%= render partial: 'layouts/navbar' %>
@@ -82,4 +29,52 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/components/shape.min.js"></script>
+
+<!--Google Charts sample-->
+  <!-- load the API -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+     <script type="text/javascript">
+       google.charts.load('current', {'packages':['corechart']});
+       google.charts.setOnLoadCallback(drawSeriesChart);
+
+     function drawSeriesChart() {
+      //  need to grab user_id and deck_id dynamically - call on elements?
+      // do I change the url to production link?
+       var jsonData = $.ajax({
+         method: "GET",
+         url: '/api/v1/users/scores?deck_id=1',
+         dataType: "json",
+         async: false,
+         success: function(someData){
+            console.log("successful");
+            console.log(someData)
+            // debugger; 
+          },
+          error: function(){
+            console.log('failure');
+          }
+       }).responseText
+       var formattedData = [['ID', 'Average Deck Score', 'Study Rate Per Week', 'Mastery Level']]
+       for (var n = 0; n < jsonData.count; n++){
+         var toAppend = [jsonData[n]["user_id"], jsonData[n]["average_deck_score"], jsonData[n]["study_rate_per_week"], jsonData[n]["mastery_level"]]
+         formattedData.push(toAppend)
+       }
+ // need to check how that comes back
+       var data = google.visualization.arrayToDataTable(jsonData);
+
+       var options = {
+         title: 'Lingo App Users ' +
+                '- How are they faring?',
+         hAxis: {title: 'Average Deck Score'},
+         vAxis: {title: 'Study Rate Per Week'},
+         bubble: {textStyle: {fontSize: 11}}
+       };
+
+
+
+       var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
+       chart.draw(data, options);
+     }
+     </script>
 </html>
