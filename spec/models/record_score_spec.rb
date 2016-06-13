@@ -38,7 +38,7 @@ RSpec.describe Score, type: :model do
       expect(master_score_weight).to eq(3)
     end
 
-    it "can update a user deck with average score and mastery level" do
+    it "can update a user deck with average score, mastery level and study rate" do
       deck = create(:deck)
       user = set_user
       score = 7
@@ -46,12 +46,13 @@ RSpec.describe Score, type: :model do
 
       expect(user_deck.average_deck_score).to eq(0)
       expect(user_deck.mastery_level).to eq(1)
+      expect(user_deck.study_rate_per_week).to eq(nil)
 
       user_deck = Score.record(deck, user, score)
 
       expect(user_deck.average_deck_score).to eq(7)
       expect(user_deck.mastery_level).to eq(3)
-
+      expect(user_deck.study_rate_per_week).to eq(0)
     end
   end
 

@@ -9,11 +9,14 @@ class Score
                          user_deck_id: user_deck.id,
                          score: score,
                          weight: weight )
+
     new_avg_score = user_deck.weighted_score_over_time
     level = assign_weight(new_avg_score)
+    study_rate = user_deck.calculate_study_rate_per_week
 
     user_deck.update( average_deck_score: new_avg_score,
-                      mastery_level: level)
+                      mastery_level: level,
+                      study_rate_per_week: study_rate)
     user_deck
   end
 
