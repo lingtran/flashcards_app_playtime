@@ -17,14 +17,12 @@ class StudySessionsController < FlashcardsController
       session[:tallied_score] += 1 if answer_correct
 
       Score.record(deck_word.deck, current_user, session[:tallied_score])
-
-      redirect_to flashcard_user_path(current_user, current_deck.first)
+      redirect_to flashcard_user_path(current_user, params[:deck_id])
 
       flash[:score_popup] = "Your score is #{session[:tallied_score]}"
       flash[:encouragement] = "Have another go at it"
     else
       session[:tallied_score] += 1 if answer_correct
-
       redirect_to flashcard_page_user_path(current_user, params[:deck_id], page: current_deck.index(next_word)+1)
     end
   end

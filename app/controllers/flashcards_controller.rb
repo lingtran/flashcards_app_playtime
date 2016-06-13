@@ -2,7 +2,7 @@ class FlashcardsController < ApplicationController
   helper_method :current_deck
 
   def index
-    @decks = Deck.all.limit(4)
+    @decks = Deck.all.limit(7)
   end
 
   def show
