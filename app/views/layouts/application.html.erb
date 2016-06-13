@@ -10,53 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/components/button.min.css">
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags%>
-
-<!--Google Charts sample-->
-  <!-- load the API -->
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-     <script type="text/javascript">
-       google.charts.load('current', {'packages':['corechart']});
-       google.charts.setOnLoadCallback(drawSeriesChart);
-
-     function drawSeriesChart() {
-      //  need to grab user_id and deck_id dynamically - call on elements?
-      // do I change the url to production link?
-       var jsonData = $.ajax({
-         method: GET,
-         url: 'api/v1/user/1/scores.json?deck_id=1',
-         dataType: "JSON";
-         data: getData,
-         async: false,
-       }).responseText;
-
- // need to check how that comes back
-       var data = google.visualization.arrayToDataTable(jsonData);
-
-      //  var data = google.visualization.arrayToDataTable([
-      //    ['ID', 'Average Deck Score', 'Study Rate Per Week', 'Mastery Level'],
-      //    ['BFRANK',    2.5,              1,      'Novice'],
-      //    ['HKITTY',    5,              1.3,      'Badass-in-Training'],
-      //    ['BSAUR',    7,               1.84,      'Badass'],
-      //    ['ATURING',    3.4,              2.78,   'Badass-in-Training'],
-      //    ['JCLARK',    7,              2,         'Badass'],
-      //    ['ME',    7,              6,      'Badass']
-      //  ]);
-
-       var options = {
-         title: 'Lingo App Users ' +
-                '- How are they faring?',
-         hAxis: {title: 'Average Deck Score'},
-         vAxis: {title: 'Study Rate Per Week'},
-         bubble: {textStyle: {fontSize: 11}}
-       };
-
-       var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
-       chart.draw(data, options);
-     }
-     </script>
-
 </head>
 <body>
   <%= render partial: 'layouts/navbar' %>
@@ -77,5 +30,51 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/components/shape.min.js"></script>
 
-</script>
+<!--Google Charts sample-->
+  <!-- load the API -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+     <script type="text/javascript">
+       google.charts.load('current', {'packages':['corechart']});
+       google.charts.setOnLoadCallback(drawSeriesChart);
+
+
+     function drawSeriesChart() {
+      //  need to grab user_id and deck_id dynamically - call on elements?
+      // do I change the url to production link?
+      var toBuildTable = [['ID', 'Average Deck Score', 'Study Rate Per Week', 'Mastery Level']];
+      console.log("headers to attach to")
+
+      $.getJSON( "/api/v1/users/scores?deck_id=1", function( json ) {
+        for (var n=0; n < json.length; n++){
+          var toAppend = [String(json[n]["user_id"]),
+                          Number(json[n]["average_deck-score"]),
+                          Number(json[n]["study_rate_per_week"]),
+                          String(json[n]["mastery_level"])];
+        toBuildTable.push(toAppend);
+        }
+        console.log("successfully push to formattedData")
+
+        toBuildTable;
+        console.log("captured json")
+
+        var data = google.visualization.arrayToDataTable(toBuildTable);
+        console.log("create table with data");
+
+
+        var options = {
+          title: 'Lingo App Users ' +
+          '- How are they faring?',
+          hAxis: {title: 'Average Deck Score'},
+          vAxis: {title: 'Study Rate Per Week'},
+          bubble: {textStyle: {fontSize: 11}}
+        };
+
+        var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
+        chart.draw(data, options);
+        console.log("instantiate and draw chart passing in data table and options")
+      });
+
+    };
+     </script>
 </html>
