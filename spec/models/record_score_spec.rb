@@ -37,6 +37,17 @@ RSpec.describe Score, type: :model do
       expect(badass_in_training_score_weight).to eq(2)
       expect(master_score_weight).to eq(3)
     end
+
+    xit "can update a user deck with average score and mastery level" do
+      deck = create(:deck)
+      user = set_user
+      score = 7
+      user_deck = create(:user_deck, user_id: user.id, deck_id: deck.id)
+      user_deck
+
+binding.pry
+      Score.record(deck, user, score)
+    end
   end
 
 end

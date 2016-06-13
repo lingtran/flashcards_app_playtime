@@ -14,21 +14,35 @@
 <!--Google Charts sample-->
   <!-- load the API -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
      <script type="text/javascript">
        google.charts.load('current', {'packages':['corechart']});
        google.charts.setOnLoadCallback(drawSeriesChart);
 
      function drawSeriesChart() {
+      //  need to grab user_id and deck_id dynamically - call on elements?
+      // do I change the url to production link?
+       var jsonData = $.ajax({
+         method: GET,
+         url: 'api/v1/user/1/scores.json?deck_id=1',
+         dataType: "JSON";
+         data: getData,
+         async: false,
+       }).responseText;
 
-       var data = google.visualization.arrayToDataTable([
-         ['ID', 'Average Deck Score', 'Study Rate Per Week', 'Mastery Level'],
-         ['BFRANK',    2.5,              1,      'Novice'],
-         ['HKITTY',    5,              1.3,      'Badass-in-Training'],
-         ['BSAUR',    7,               1.84,      'Badass'],
-         ['ATURING',    3.4,              2.78,   'Badass-in-Training'],
-         ['JCLARK',    7,              2,         'Badass'],
-         ['ME',    7,              6,      'Badass']
-       ]);
+ // need to check how that comes back
+       var data = google.visualization.arrayToDataTable(jsonData);
+
+      //  var data = google.visualization.arrayToDataTable([
+      //    ['ID', 'Average Deck Score', 'Study Rate Per Week', 'Mastery Level'],
+      //    ['BFRANK',    2.5,              1,      'Novice'],
+      //    ['HKITTY',    5,              1.3,      'Badass-in-Training'],
+      //    ['BSAUR',    7,               1.84,      'Badass'],
+      //    ['ATURING',    3.4,              2.78,   'Badass-in-Training'],
+      //    ['JCLARK',    7,              2,         'Badass'],
+      //    ['ME',    7,              6,      'Badass']
+      //  ]);
 
        var options = {
          title: 'Lingo App Users ' +

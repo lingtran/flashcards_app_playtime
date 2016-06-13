@@ -26,6 +26,8 @@ FactoryGirl.define do
   factory :user_deck do
     association(:deck)
     association(:user)
+    average_deck_score 0
+    mastery_level 1
   end
 
   factory :study_session do
