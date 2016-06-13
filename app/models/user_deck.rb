@@ -1,11 +1,9 @@
 class UserDeck < ActiveRecord::Base
-  # scope :found_deck, -> { where(deck_id: deck_id) }
   has_many :study_sessions
 
   belongs_to :deck
   belongs_to :user
 
-  # set an after create or update call to update tier based on weighted score for user
   after_update :calculate_study_rate_per_week
 
   def weighted_score_over_time

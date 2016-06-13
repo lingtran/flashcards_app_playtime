@@ -30,6 +30,18 @@ RSpec.describe UserDeck, type: :model do
       expect(second_avg_score).to eq(6)
 
     end
+  end
+
+  context "#calculate study rate per week" do
+    before(:each) do
+      first_user, second_user = create_list(:user, 2)
+      deck = create(:deck)
+      @first_user_deck = create(:user_deck, user_id: first_user.id, deck_id: deck.id)
+
+      5.times do |n|
+        create(:study_session, :badass_in_training_score_weight, user_deck_id: @first_user_deck.id, date: "2016-06-#{13+1} 12:05:18")
+      end
+    end
 
     it "can calculate study rate per week" do
       sessions_count = @first_user_deck.study_sessions.count
@@ -37,6 +49,18 @@ RSpec.describe UserDeck, type: :model do
 
       expect(sessions_count).to eq(5)
       expect(study_rate).to eq(0.714)
+    end
+
+    it "updates study rate after record is updated" do
+      original_study_rate = @first_user_deck.send(:calculate_study_rate_per_week)
+
+      expect(original_study_rate).to eq(0.714)
+
+      Score.record(@first_user_deck, @first_user_deck.user, 7)
+
+      new_study_rate = @first_user_deck.send(:calculate_study_rate_per_week)
+
+      expect(new_study_rate).not_to eq(original_study_rate)
     end
   end
 end
