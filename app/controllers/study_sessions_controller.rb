@@ -1,5 +1,5 @@
 class StudySessionsController < FlashcardsController
-  before_filter :find_deck_word, :first_deck_word?, :last_deck_word?, :answer_correct?, only: [:create]
+  before_action :find_deck_word, :first_deck_word?, :last_deck_word?, :answer_correct?, only: [:create]
 
   helper_method :deck_word,
                 :next_word,
