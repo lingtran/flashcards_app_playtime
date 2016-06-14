@@ -6,6 +6,9 @@ Rails.application.routes.draw do
       get '/flashcards', to: "flashcards#index", as: :flashcards
       get '/flashcards/:deck_id', to: 'flashcards#show', as: :flashcard
       resources :study_sessions, only: [:create]
+      resources :tallies, only: [:create] do
+        delete '/clear_tallies', to: 'tallies#destroy', as: :clear
+      end
       get '/flashcards/:deck_id/card=:page', to: "flashcards#show", as: :flashcard_page
     end
   end

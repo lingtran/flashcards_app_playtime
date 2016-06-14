@@ -1,28 +1,29 @@
 class StudySessionsController < FlashcardsController
-  before_filter :find_deck_word, :set_to_zero_if_first_deck_word, :score_if_answer_correct?, on: [:create]
-  helper_method :deck_word
-  helper_method :last_deck_word?
-  helper_method :first_deck_word?
-  helper_method :next_word
+  before_filter :find_deck_word, only: [:create]
+
+  helper_method :deck_word,
+                :last_deck_word?,
+                :first_deck_word?,
+                :next_word,
+                :answer_correct?
 
   def create
     if first_deck_word?
       session[:tallied_score] = 0
-      session[:tallied_score] += 1
+      session[:tallied_score] += 1 if answer_correct?
       redirect_to flashcard_page_user_path(current_user, params[:deck_id], page: current_deck.index(next_word)+1)
     elsif last_deck_word?
-      session[:tallied_score] += 1
+      session[:tallied_score] += 1 if answer_correct?
       Score.record(deck_word.deck, current_user, session[:tallied_score])
       redirect_to flashcard_user_path(current_user, params[:deck_id])
 
       flash[:score_popup] = "Your score is #{session[:tallied_score]}"
       flash[:encouragement] = "Have another go at it"
     else
-      session[:tallied_score] += 1
+      session[:tallied_score] += 1 if answer_correct?
       redirect_to flashcard_page_user_path(current_user, params[:deck_id], page: current_deck.index(next_word)+1)
     end
   end
-
 
   private
     def find_deck_word
@@ -47,6 +48,10 @@ class StudySessionsController < FlashcardsController
       else
         session[:tallied_score]
       end
+    end
+
+    def answer_correct?
+      params[:choice] == deck_word.word.pinyin
     end
 
     def last_deck_word?
