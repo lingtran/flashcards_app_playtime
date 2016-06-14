@@ -45,10 +45,11 @@
       var toBuildTable = [['ID', 'Average Deck Score', 'Study Rate Per Week', 'Mastery Level']];
       console.log("headers to attach to")
 
-      $.getJSON( "/api/v1/users/scores?deck_id=1", function( json ) {
+      var id = $('#deck_id').val();
+      $.getJSON( "/api/v1/users/scores?deck_id=" + id, function( json ) {
         for (var n=0; n < json.length; n++){
           var toAppend = [String(json[n]["user_id"]),
-                          Number(json[n]["average_deck-score"]),
+                          Number(json[n]["average_deck_score"]),
                           Number(json[n]["study_rate_per_week"]),
                           String(json[n]["mastery_level"])];
         toBuildTable.push(toAppend);
