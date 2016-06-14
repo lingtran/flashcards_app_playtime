@@ -41,17 +41,14 @@ $(document).ready(function(){
 
   $("#booyeah-done").on('click', function(){
     $('#deck-stats').show();
-
     localStorage.clear();
     $('.tally').hide();
-
-    
   });
 
   $("#home-link").on('click', function(){
     if (localStorage.score){
       localStorage.clear();
-  }
-  })
+      }
+    })
 
 })

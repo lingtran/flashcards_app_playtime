@@ -16,11 +16,11 @@
 
   <main class="container">
 
-      <% flash.each do |name, message| %>
-        <%= content_tag :div, message, id: "flash_#{name}" %>
-      <% end %>
+    <% flash.each do |name, message| %>
+      <%= content_tag :div, message, id: "flash_#{name}" %>
+    <% end %>
 
-      <%= yield %>
+    <%= yield %>
 
   </main>
 
@@ -30,8 +30,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.1.8/components/shape.min.js"></script>
 
-<!--Google Charts sample-->
-  <!-- load the API -->
+<!--Google Charts -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
      <script type="text/javascript">
@@ -40,15 +39,15 @@
 
 
      function drawSeriesChart() {
-      //  need to grab user_id and deck_id dynamically - call on elements?
-      // do I change the url to production link?
       var toBuildTable = [['ID', 'Average Deck Score', 'Study Rate Per Week', 'Mastery Level']];
       console.log("headers to attach to")
 
-      $.getJSON( "/api/v1/users/scores?deck_id=1", function( json ) {
+      var id = $('#deck_id').val();
+      
+      $.getJSON( "/api/v1/users/scores?deck_id=" + id, function( json ) {
         for (var n=0; n < json.length; n++){
           var toAppend = [String(json[n]["user_id"]),
-                          Number(json[n]["average_deck-score"]),
+                          Number(json[n]["average_deck_score"]),
                           Number(json[n]["study_rate_per_week"]),
                           String(json[n]["mastery_level"])];
         toBuildTable.push(toAppend);
