@@ -63,9 +63,10 @@
         var options = {
           title: 'Lingo App Users ' +
           '- How are they faring?',
-          hAxis: {title: 'Average Deck Score'},
-          vAxis: {title: 'Study Rate Per Week'},
-          bubble: {textStyle: {fontSize: 11}}
+          hAxis: {title: 'Average Deck Score', gridlines: {color: "#FFF"}},
+          vAxis: {title: 'Study Rate Per Week', gridlines: {color: "#FFF"}},
+          bubble: {textStyle: {fontSize: 11}},
+          sizeAxis: {maxSize: 25}
         };
 
         var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
