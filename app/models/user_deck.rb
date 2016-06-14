@@ -13,7 +13,6 @@ class UserDeck < ActiveRecord::Base
   end
 
   def calculate_study_rate_per_week
-    # double check if this is the best approach
     (study_sessions.count/7.to_f).round(3)
   end
 

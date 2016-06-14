@@ -35,7 +35,7 @@ class Seed
   end
 
   def generate_users
-    3.times do |n|
+    100.times do |n|
       User.create(email: "user#{n}@lingoapp.fake", password: "password", provider: "lingoapp")
     end
     puts "Generate users"
@@ -54,28 +54,28 @@ class Seed
   end
 
   def generate_user_decks
-    @first_user = User.find(1)
-    @second_user = User.find(2)
-    @third_user = User.find(3)
+    decks = [pinyin_deck, definition_deck]
 
-    @first_user_deck_pinyin = UserDeck.create(user_id: first_user.id, deck_id: @pinyin_deck.id )
-    @first_user_deck_def = UserDeck.create(user_id: first_user.id, deck_id: @definition_deck.id )
-    @second_user_deck_pinyin = UserDeck.create(user_id: second_user.id, deck_id: @pinyin_deck.id )
-    @second_user_deck_def = UserDeck.create(user_id: second_user.id, deck_id: @definition_deck.id )
-    @third_user_deck_pinyin = UserDeck.create(user_id: third_user.id, deck_id: @pinyin_deck.id )
+    100.times do
+      deck = decks.shuffle.sample.id
+      User.all.each do |user|
+        UserDeck.create(user_id: user.id, deck_id: deck.)
+      end
+    end
     puts "Generate user decks"
   end
 
   def generate_study_sessions_for_first_user
     weights = [0, 1, 2]
     scores = [0, 1, 2, 3, 4, 5, 6, 7]
-    dates = { most_recent: "2016-06-08 12:05:18", three_days_later: "2016-06-11 06:05:18", next_day: "2016-06-09 09:05:18"}
-    decks = [first_user_deck_def, first_user_deck_pinyin]
+    dates = ["2016-06-08 12:05:18", "2016-06-11 06:05:18", "2016-06-09 09:05:18", "2016-06-09 09:15:18", "2016-06-09 09:25:18", "2016-06-09 09:45:18", "2016-06-15 12:05:18", "2016-06-15 11:05:18", "2016-06-15 12:15:18", "2016-06-15 12:25:18", "2016-06-15 12:55:18", "2016-06-15 12:59:18", "2016-06-25 12:05:18", "2016-06-16 12:05:15", "2016-06-18 06:06:18", "2016-06-15 12:09:19", "2016-06-15 12:05:18", "2016-06-15 22:05:18", "2016-06-15 09:05:18", "2016-06-15 08:05:18"]
+    # took a break here in asserting sample dates
+    decks = UserDeck.all
 
     20.times do
       score = scores.shuffle.sample
       weight = weights.shuffle.sample
-      date = dates.values.shuffle.sample
+      date = dates.shuffle.sample
       deck_id = decks.shuffle.sample.id
 
       StudySession.create( date: date, user_deck_id: deck_id, score: score, weight: weight )
@@ -91,6 +91,21 @@ class Seed
     decks = [second_user_deck_def, second_user_deck_pinyin]
 
     40.times do
+      score = scores.shuffle.sample
+      weight = weights.shuffle.sample
+      date = dates.values.shuffle.sample
+      deck_id = decks.shuffle.sample.id
+
+      StudySession.create( date: date, user_deck_id: deck_id, score: score, weight: weight )
+    end
+
+  def generate_study_sessions_for_mutiple_users
+    weights = [0, 1, 2]
+    scores = [0, 1, 2, 3, 4, 5, 6, 7]
+    dates = { most_recent: "2016-06-08 12:05:18", three_days_later: "2016-06-11 06:05:18", next_day: "2016-06-09 09:05:18"}
+    decks = [first_user_deck_def, first_user_deck_pinyin]
+
+    20.times do
       score = scores.shuffle.sample
       weight = weights.shuffle.sample
       date = dates.values.shuffle.sample

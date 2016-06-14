@@ -1,0 +1,43 @@
+<div class="sixteen wide column centered row">
+    <div class="column"> <!--debug with yellow-->
+        <div class="basic segment deck-section">
+          <div class="ui people shape" id="flashcard-<%= index %>">
+            <div class="ui people shape deck-section">
+              <div class="sides flashcard">
+                <div class="active side flashcard">
+                  <div class="ui card">
+                    <div class="content">
+                      <div class="header" id="flashcard-<%= index %>-header">
+                        <%= deck_word.simp %>
+                      </div>
+                      <div class="meta" id="flashcard-<%= index %>-question">
+                        <%= deck_word.question_name %>
+                      </div>
+                    </div>
+                  </div>
+                </div> <!--active side-->
+                <div class="side flashcard">
+                  <div class="ui card">
+                    <div class="image">
+                      <%= image_tag("http://www.newyorker.com/wp-content/uploads/2014/08/Stokes-Hello-Kitty2-1200.jpg") %>
+                    </div>
+                  </div>
+                </div> <!--image side-->
+                <div class="side flashcard">
+                  <div class="ui card">
+                    <div class="content">
+                      <div class="meta" id="flashcard-<%= index %>-definition">
+                        <a> Definition </a>
+                      </div>
+                      <div class="description">
+                        <%= deck_word.definition %>
+                      </div>
+                    </div>
+                  </div>
+                </div> <!--definition side-->
+              </div><!--sides-->
+            </div><!--people-->
+          </div> <!--flashcards deck-section -->
+        </div> <!--deck-section basic segment-->
+    </div> <!--column yellow-->
+</div> <!-- column blue -->
