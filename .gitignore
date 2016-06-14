@@ -25,6 +25,5 @@ temp_screenshot.tiff
 /public/assets/*
 /db/dict-sqlite-dumpfile201606061148.sql
 /db/dict-sqlite-dumpfile201606110217-new.sql
-/dictionary
-schema_design.xml
 schema_design_it2.xml
+/dictionary

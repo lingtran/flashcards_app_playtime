@@ -36,6 +36,7 @@ class Seed
 
   def generate_users
     100.times do |n|
+      # need to add names
       User.create(email: "user#{n}@lingoapp.fake", password: "password", provider: "lingoapp")
     end
     puts "Generate users"
