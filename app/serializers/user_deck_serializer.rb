@@ -13,6 +13,10 @@ class UserDeckSerializer < ActiveModel::Serializer
   end
 
   def user_name
-    object.user.name.split.first
+    if object.user.name
+      object.user.name.split.first
+    else
+      "anonymous"
+    end
   end
 end
