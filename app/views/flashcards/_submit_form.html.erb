@@ -7,11 +7,12 @@
         <%= render partial: 'tags', locals: { deck_word: deck_word, index: index } %>
 
         <br></br>
-        <% if deck_word == current_deck.last %>
+        <%= next_or_finish_given(deck_word, current_deck) %>
+        <!-- <% if deck_word == current_deck.last %>
           <%= submit_tag "Finish", id: "booyeah-done", class: "submit-button ui teal button" %>
         <% else %>
           <%= submit_tag "Next", id: "next-card", class: "submit-button ui teal button" %>
-        <% end %>
+        <% end %> -->
       <% end %> <!-- end form -->
     </div><!--deck-section-choices-->
   </div><!--deck-section-->
