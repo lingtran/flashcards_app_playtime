@@ -56,7 +56,7 @@ RSpec.describe UserDeck, type: :model do
 
       expect(original_study_rate).to eq(0.714)
 
-      Score.record(@first_user_deck, @first_user_deck.user, 7)
+      ScoreConversion.process(@first_user_deck, @first_user_deck.user, 7)
 
       new_study_rate = @first_user_deck.calculate_study_rate_per_week
 
