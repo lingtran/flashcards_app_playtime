@@ -24,10 +24,10 @@ module DataHelpers
 
     24.times do |n|
       score = scores.shuffle.sample
-      Score.record(deck, first_user, score)
+      ScoreConversion.process(deck, first_user, score)
 
       score = scores.shuffle.sample
-      Score.record(deck, second_user, score)
+      ScoreConversion.process(deck, second_user, score)
     end
   end
 
