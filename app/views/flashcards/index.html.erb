@@ -5,10 +5,12 @@
     </p>
 
   <div class="ui three column centered grid">
+  <% cache do %>
     <% @decks.each do |deck| %>
     <div class="eight wide column centered row" id="landing-page-button">
         <%= link_to deck.name, flashcard_user_path(current_user, deck), class: "huge ui button teal" %>
     </div>
     <% end %>
+  <% end %> <!--cache-->
   </div>
 </div>

@@ -3,7 +3,7 @@
 </div>
 
 <div class="ui basic container center aligned basic teal segment" id="deck-container">
-
+<% cache do %>
     <% @deck_words_per_page.each_with_index do |deck_word, index| %>
       <div class="ui three column centered grid">
         <%= render partial: "directional_buttons", locals: { index: index } %>
@@ -13,6 +13,7 @@
         <%= render partial: "submit_form", locals: {index: index, deck_word: deck_word, current_deck: current_deck } %>
       </div> <!-- grid -->
     <% end %> <!-- end iteration -->
+<% end %> <!-- cache -->
 
 </div> <!-- deck container-->
 
