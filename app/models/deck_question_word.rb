@@ -18,22 +18,18 @@ class DeckQuestionWord < ActiveRecord::Base
     current_deck[next_index]
   end
 
-  # test
   def pinyin
     word.pinyin
   end
 
-  #test
   def simp
     word.simp
   end
 
-  # test
   def definition
     word.definition
   end
 
-# test
   def question_name
     question.name
   end
