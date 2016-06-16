@@ -75,7 +75,7 @@ RSpec.describe ScoreConversion, type: :model do
 
       expect(user_deck.average_deck_score).to eq(7)
       expect(user_deck.mastery_level).to eq(3)
-      expect(user_deck.study_rate_per_week).to eq(0)
+      expect(user_deck.study_rate_per_week.to_f).to eq(0.143)
     end
   end
 

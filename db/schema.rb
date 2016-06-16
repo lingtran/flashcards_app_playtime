@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613060007) do
+ActiveRecord::Schema.define(version: 20160616000024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,11 +57,11 @@ ActiveRecord::Schema.define(version: 20160613060007) do
   create_table "user_decks", force: :cascade do |t|
     t.integer  "deck_id"
     t.integer  "user_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.integer  "study_rate_per_week"
-    t.integer  "average_deck_score",  default: 0
-    t.integer  "mastery_level",       default: 1
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.decimal  "study_rate_per_week", precision: 10, scale: 3
+    t.integer  "average_deck_score",                           default: 0
+    t.integer  "mastery_level",                                default: 1
   end
 
   add_index "user_decks", ["deck_id"], name: "index_user_decks_on_deck_id", using: :btree
