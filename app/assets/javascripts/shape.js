@@ -24,6 +24,8 @@ $(document).ready(function() {
     informOfAction(flipDownButtonId);
     informOfAction(flipRightButtonId);
     informOfAction(flipLeftButtonId);
+    informOfAction('#stats-button')
+    informOfAction('#home-link')
 
   function animateShape(directionalButtonId, flashcardId, direction) {
     $(directionalButtonId).click(function(){

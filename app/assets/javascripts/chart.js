@@ -1,10 +1,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+//= require semantic-ui/modules/behavior/form.js
+//= require semantic-ui/modules/popup.js
+
 $(document).ready(function(){
 
   google.charts.load('current', {'packages':['corechart']});
-  
+
   google.charts.setOnLoadCallback(drawSeriesChart);
 
   function drawSeriesChart() {
@@ -31,12 +35,19 @@ $(document).ready(function(){
        hAxis: {title: 'Average Deck Score', gridlines: {color: "#FFF"}},
        vAxis: {title: 'Study Rate Per Week', gridlines: {color: "#FFF"}},
        bubble: {textStyle: {fontSize: 11}},
-       sizeAxis: {maxSize: 25}
+       sizeAxis: {maxSize: 20}
      };
 
      var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
      chart.draw(data, options);
     });
   };
+
+
+  var scoresChart = $('#series_chart_div').val();
+
+  $('#stats-button').click(function(){
+    $('#series_chart_div').toggle(scoresChart);
+  })
 
 })

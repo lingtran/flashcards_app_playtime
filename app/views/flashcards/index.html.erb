@@ -1,14 +1,15 @@
 <div class="ui basic container center aligned basic teal segment" id="deck-container">
   <h2 class="ui teal header"> Choose Your Adventure</h2>
     <p>
-      Pick from pick a category you want to focus on! You can come back any time to focus on a different area.
+      Pick a flashcard deck to learn, recall or simply explore Chinese words.
     </p>
 
   <div class="ui three column centered grid">
     <% @decks.each do |deck| %>
-    <div class="eight wide column centered row" id="landing-page-button">
+    <div class="seven wide column centered row" id="landing-page-button">
         <%= link_to deck.name, flashcard_user_path(current_user, deck), class: "huge ui button teal" %>
     </div>
     <% end %>
   </div>
+  <br>
 </div>

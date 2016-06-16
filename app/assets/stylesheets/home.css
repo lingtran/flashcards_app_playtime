@@ -2,3 +2,7 @@
 #sign_in {
   color: white;
 }
+
+.ui.raised.very.padded.container.segment {
+  padding: 15%;
+}
