@@ -21,7 +21,7 @@ RSpec.describe "user can choose a deck", type: :feature do
       expect(page).to have_content deck_two.name
       click_link "#{deck_two.name}"
 
-      expect(page).to have_current_path flashcard_user_path(user, deck_two.id)
+      expect(page).to have_current_path flashcard_user_path(user, deck_two)
 
       within("#flashcard-0-header") do
         expect(page).to have_content word_one.simp
@@ -30,6 +30,17 @@ RSpec.describe "user can choose a deck", type: :feature do
       within("#flashcard-0-question") do
         expect(page).to have_content question_two.name
       end
+
+      expect(page).to have_current_path flashcard_user_path(user, deck_two)
+
+      directional_buttons = page.all(".ui button")
+
+      expect(directional_buttons.count).to eq(4)
+
+      card = page.all("#flashcard-0")
+
+      expect(card.count).to eq(1)
+
     end
   end
 end
