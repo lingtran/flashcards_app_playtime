@@ -13,3 +13,4 @@ class FlashcardsController < ApplicationController
     @current_deck ||= DeckQuestionWord.where(deck_id: params[:deck_id].to_i).limit(7)
   end
 end
+` `
