@@ -2,7 +2,7 @@ class FlashcardsController < ApplicationController
   helper_method :current_deck
 
   def index
-    @decks = Deck.where(id: [1, 2])
+    @decks = Deck.all
   end
 
   def show
@@ -13,4 +13,3 @@ class FlashcardsController < ApplicationController
     @current_deck ||= DeckQuestionWord.where(deck_id: params[:deck_id].to_i).limit(7)
   end
 end
-` `

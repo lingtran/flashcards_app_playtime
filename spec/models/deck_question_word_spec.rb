@@ -50,4 +50,19 @@ RSpec.describe DeckQuestionWord, type: :model do
       expect(@deck_word.question_name).to eq(@question.name)
     end
   end
+
+  context "can mark a question word as correct" do
+    before(:each) do
+      @deck_question_word = create(:deck_question_word)
+    end
+
+    it "can change its status to incorrect" do
+      expect(@deck_question_word.is_correct).to eq("true")
+
+      change = @deck_question_word.false!
+
+      expect(change).not_to eq ("true")
+      expect(@deck_question_word.is_correct).to eq("false")
+    end
+  end
 end

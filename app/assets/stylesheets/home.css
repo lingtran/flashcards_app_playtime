@@ -2,3 +2,11 @@
 #sign_in {
   color: white;
 }
+
+.ui.raised.very.padded.container.segment {
+  padding: 15%;
+}
+
+.flash {
+  margin-top: 3%;
+}

@@ -1,8 +1,9 @@
 class Seed
   attr_reader :pinyin_question,
-              :definition_question,
               :random_deck,
+              :random_deck_two,
               :slang_deck,
+              :slang_deck_two,
               :novice_words,
               :badass_in_training_words,
               :master_words,
@@ -28,32 +29,37 @@ class Seed
     seed.generate_deck_question_words_novice_for_random_deck
     seed.generate_deck_question_words_badass_in_training_for_random_deck
     seed.generate_deck_question_words_master_for_random_deck
+    seed.generate_deck_question_words_novice_for_random_deck_two
+    seed.generate_deck_question_words_badass_in_training_for_random_deck_two
+    seed.generate_deck_question_words_master_for_random_deck_two
     seed.generate_slang_words
     seed.generate_deck_question_words_novice_for_slang_deck
+    seed.generate_deck_question_words_novice_for_slang_deck_two
   end
 
   def generate_users
-    30.times do |n|
-      User.create(name: "Ethel {n}", email: "user#{n}@lingoapp.fake", password: "password", provider: "lingoapp")
-      User.create(name: "Fred {n}", email: "user#{n}@lingoapp.fake", password: "password", provider: "lingoapp")
+    5.times do |n|
+      User.create(name: "Ethel#{n}", email: "user#{n}@lingoapp.fake", password: "password", provider: "lingoapp")
+      User.create(name: "Fred#{n}", email: "user#{n}@lingoapp.fake", password: "password", provider: "lingoapp")
     end
     puts "Generate users"
   end
 
   def generate_questions
     @pinyin_question = Question.create(name: "Select the correct pinyin", focus_area: 0)
-    @definition_question = Question.create(name: "Select the correct definition", focus_area: 1)
     puts "Generate questions"
   end
 
   def generate_decks
-    @random_deck = Deck.create(name: "Random Deck")
-    @slang_deck = Deck.create(name: "Slang Deck")
+    @random_deck = Deck.create(name: "Random Deck 《随机抽认卡》")
+    @random_deck_two = Deck.create(name: "Random Deck 2 《随机抽认卡（第二集)》")
+    @slang_deck = Deck.create(name: "Slang Deck 《口语抽认卡》")
+    @slang_deck_two = Deck.create(name: "Slang Deck 2 《口语抽认卡（第二集)》")
     puts "Generate decks"
   end
 
   def generate_user_decks
-    decks = [random_deck, slang_deck]
+    decks = [random_deck, slang_deck, random_deck_two, slang_deck_two]
 
     20.times do
       deck = decks.shuffle.sample.id
@@ -66,7 +72,21 @@ class Seed
 
   def generate_study_sessions_for_users
     weights = [1, 2, 3]
-    scores = [1, 2, 3, 4, 5, 6, 7]
+
+    scores = [1,
+              2,
+              2.5,
+              3,
+              3.1,
+              4.4,
+              5,
+              5.25,
+              5.6,
+              6,
+              6.10,
+              6.9,
+              7]
+
     dates = ["2016-06-08 12:05:18",
               "2016-06-11 06:05:18",
               "2016-06-09 09:05:18",
@@ -104,8 +124,27 @@ class Seed
       StudySession.create( date: date, user_deck_id: deck_id, score: score, weight: weight )
     end
 
-    new_scores = [2, 3, 4, 5, 6, 7]
-    study_rates = [0.513, 1.546, 2.345, 3.450, 4.789, 5.789, 6.901]
+    new_scores = [1,
+              2,
+              2.5,
+              3,
+              3.1,
+              4.4,
+              5,
+              5.25,
+              5.6,
+              6,
+              6.10,
+              6.9,
+              7]
+
+    study_rates = [0.513,
+                   1.546,
+                   2.345,
+                   3.450,
+                   4.789,
+                   5.789,
+                   6.901]
 
     UserDeck.all.each do |user_deck|
       new_avg_score = new_scores.shuffle.sample
@@ -143,11 +182,25 @@ class Seed
     puts "Generate words for random deck at novice level"
   end
 
+  def generate_deck_question_words_novice_for_random_deck_two
+    novice_words.each do |word|
+      DeckQuestionWord.create(deck_id: random_deck_two.id, question_id: pinyin_question.id, word_id: word.id, is_correct: 0, level: 0)
+    end
+    puts "Generate words for random deck two at novice level"
+  end
+
   def generate_deck_question_words_badass_in_training_for_random_deck
     badass_in_training_words.each do |word|
       DeckQuestionWord.create(deck_id: random_deck.id, question_id: pinyin_question.id, word_id: word.id, is_correct: 0, level: 1)
     end
     puts "Generate words for random deck at badass_in_training level"
+  end
+
+  def generate_deck_question_words_badass_in_training_for_random_deck_two
+    badass_in_training_words.each do |word|
+      DeckQuestionWord.create(deck_id: random_deck_two.id, question_id: pinyin_question.id, word_id: word.id, is_correct: 0, level: 1)
+    end
+    puts "Generate words for random deck two at badass_in_training level"
   end
 
   def generate_deck_question_words_master_for_random_deck
@@ -157,6 +210,12 @@ class Seed
     puts "Generate words for random deck at master level"
   end
 
+  def generate_deck_question_words_master_for_random_deck_two
+    master_words.each do |word|
+      DeckQuestionWord.create(deck_id: random_deck_two.id, question_id: pinyin_question.id, word_id: word.id, is_correct: 0, level: 2)
+    end
+    puts "Generate words for random deck two at master level"
+  end
 
   def raw_slang_words
     [{ trad: "萌萌噠", simp: "萌萌哒", pinyin: "meng2 meng2 da1", definition: "describing people who are very cute" },
@@ -186,7 +245,7 @@ class Seed
   end
 
   def generate_slang_words
-    @slang_words = raw_slang_words.map do |word|
+    @slang_words = raw_slang_words.shuffle.map do |word|
       Word.create(trad: word[:trad], simp: word[:simp], pinyin: word[:pinyin], definition: word[:definition])
     end
 
@@ -195,9 +254,16 @@ class Seed
 
   def generate_deck_question_words_novice_for_slang_deck
     @slang_words.each do |word|
-      DeckQuestionWord.create(deck_id: slang_deck.id, question_id: definition_question.id, word_id: word.id, is_correct: 0, level: 0)
+      DeckQuestionWord.create(deck_id: slang_deck.id, question_id: pinyin_question.id, word_id: word.id, is_correct: 0, level: 0)
     end
     puts "Generate words for slang deck at novice level"
+  end
+
+  def generate_deck_question_words_novice_for_slang_deck_two
+    @slang_words.shuffle.each do |word|
+      DeckQuestionWord.create(deck_id: slang_deck_two.id, question_id: pinyin_question.id, word_id: word.id, is_correct: 0, level: 0)
+    end
+    puts "Generate words for slang deck two at novice level"
   end
 
 end

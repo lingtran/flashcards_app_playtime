@@ -16,6 +16,10 @@
 
 </div> <!-- deck container-->
 
+
 <div class="ui container center aligned basic teal segment" id="deck-stats">
-  <%= render partial: 'scores_across_users_chart' %>
+  <div class="ui icon button" data-content="Wondering about other users..."   id="stats-button">
+    <i class="add icon"></i>
+  </div>
+    <%= render partial: 'scores_across_users_chart' %>
 </div>   <!-- report performance across users for current deck -->

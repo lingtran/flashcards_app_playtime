@@ -1,3 +1,4 @@
+<% cache do %>
 <div class="ui radio checkbox">
   <%= radio_button_tag :choice, maybe_decoy_for(deck_word), false, id: "deck-word" %>
   <%= label_tag :word, maybe_decoy_for(deck_word) %>
@@ -12,3 +13,4 @@
   <%= radio_button_tag :choice, another_decoy_for(deck_word.simp), false, id: "other-deck-word-two" %>
   <%= label_tag :word, another_decoy_for(deck_word.simp) %>
 </div>
+<% end %>
