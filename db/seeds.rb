@@ -1,6 +1,5 @@
 class Seed
   attr_reader :pinyin_question,
-              :definition_question,
               :random_deck,
               :slang_deck,
               :novice_words,
@@ -42,7 +41,6 @@ class Seed
 
   def generate_questions
     @pinyin_question = Question.create(name: "Select the correct pinyin", focus_area: 0)
-    @definition_question = Question.create(name: "Select the correct definition", focus_area: 1)
     puts "Generate questions"
   end
 
@@ -195,7 +193,7 @@ class Seed
 
   def generate_deck_question_words_novice_for_slang_deck
     @slang_words.each do |word|
-      DeckQuestionWord.create(deck_id: slang_deck.id, question_id: definition_question.id, word_id: word.id, is_correct: 0, level: 0)
+      DeckQuestionWord.create(deck_id: slang_deck.id, question_id: pinyin_question.id, word_id: word.id, is_correct: 0, level: 0)
     end
     puts "Generate words for slang deck at novice level"
   end

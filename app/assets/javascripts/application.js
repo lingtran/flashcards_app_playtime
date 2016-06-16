@@ -39,8 +39,10 @@ $(document).ready(function(){
     })
   };
 
+  var scoresChart = $('#series_chart_div').val();
+
   $("#booyeah-done").on('click', function(){
-    $('#deck-stats').show();
+    $('#deck-stats').show(scoresChart);
     localStorage.clear();
     $('.tally').hide();
   });
