@@ -16,8 +16,8 @@
 
 $(document).ready(function(){
   if (localStorage.score ){
-    $("#score").text(localStorage.score);
     $('#series_chart_div').hide();
+    $("#score").text(localStorage.score);
   } else {
     $('.tally.ui').hide();
     localStorage.score = 0;
@@ -39,10 +39,7 @@ $(document).ready(function(){
     })
   };
 
-  var scoresChart = $('#series_chart_div').val();
-
   $("#booyeah-done").on('click', function(){
-    $('#deck-stats').show(scoresChart);
     localStorage.clear();
     $('.tally').hide();
   });

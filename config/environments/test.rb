@@ -15,6 +15,8 @@ Rails.application.configure do
   # Configure static file server for tests with Cache-Control for performance.
   config.serve_static_files   = true
   config.static_cache_control = 'public, max-age=3600'
+  config.cache_store = :dalli_store, nil, { :namespace => LingoApp, :expires_in => 1.day, :compress => true }
+
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true

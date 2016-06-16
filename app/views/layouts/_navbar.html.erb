@@ -1,7 +1,7 @@
 <% if current_user %>
-<div class="ui stackable menu">
-  <div class="item">
-    <%= link_to "Lingo App", root_path, id: "home-link" %>
+<div class="ui stackable top fixed menu">
+  <div class="item", id="home-link", data-content="Take me back home">
+    <%= link_to "Lingo App", root_path %>
   </div>
 
   <div class="right menu">

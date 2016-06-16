@@ -46,6 +46,11 @@ gem 'will_paginate'
 
 gem 'newrelic_rpm'
 
+gem 'rack-cache'
+gem 'dalli'
+gem 'kgio'
+gem 'memcachier'
+
 group :test do
   gem 'vcr'
   gem 'webmock'
