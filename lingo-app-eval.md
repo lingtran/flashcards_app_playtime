@@ -2,9 +2,9 @@ Student: Ling Tran
 
 Assessor: Brenna
 
-GithubURL: https://github.com/lingtran/lingo_app
+GithubURL: [https://github.com/lingtran/lingo_app](https://github.com/lingtran/lingo_app)
 
-Heroku: http://lingoapp.herokuapp.com/
+Heroku: [http://lingoapp.herokuapp.com/](http://lingoapp.herokuapp.com/)
 
 Notes:
   - Used mem-cachier and other gems, super fast load times
