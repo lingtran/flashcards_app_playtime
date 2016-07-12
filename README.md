@@ -34,7 +34,7 @@ As stated above, Lingo App's MVP was built under the context of a two-week self-
 > Ruby on Rails | Ruby | PostgreSQL | WEBrick
 
 ##### Client-side
-> JavaScript | HTML | CSS
+> JavaScript | jQuery | AJAX | HTML | CSS
 
 ##### Styling
 > Semantic UI
