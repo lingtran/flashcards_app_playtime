@@ -15,7 +15,7 @@
 
 ## Motivation
 
-Lingo App was conceived years as a working professional whose appetite for learning is sometimes larger than what time can allow.
+Lingo App was conceived years a few years ago as a working professional whose appetite for learning is sometimes larger than what time can allow.
 
 Two additional reasons for its conception:
   1. There was a curiosity about the process and challenges involved in building SuperMemo-like applications (basically anything related to learning management tools and language); and
