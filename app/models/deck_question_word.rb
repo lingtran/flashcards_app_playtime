@@ -23,7 +23,7 @@ class DeckQuestionWord < ActiveRecord::Base
   end
 
   def self.shuffle_deck(current_deck, deck_id)
-    current_deck.replace(DeckQuestionWord.set_deck(deck_id))
+    current_deck.replace(set_deck(deck_id))
   end
 
   def pinyin
