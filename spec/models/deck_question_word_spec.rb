@@ -60,7 +60,6 @@ RSpec.describe DeckQuestionWord, type: :model do
       create_list(:deck_question_word, 14)
       @deck_id       = 1
       @current_deck  = DeckQuestionWord.set_deck(deck_id)
-      @shuffled_deck = DeckQuestionWord.shuffle_deck(current_deck, deck_id)
     end
 
     it "can set a deck of seven words" do
@@ -69,8 +68,11 @@ RSpec.describe DeckQuestionWord, type: :model do
     end
 
     it "can return a new deck of shuffled words" do
-      expect(shuffled_deck.first).not_to eq(current_deck.first)
-      expect(shuffled_deck.last).not_to eq(current_deck.last)
+      original_first_word = current_deck.first
+      shuffled_deck       = DeckQuestionWord.shuffle_deck(current_deck, deck_id)
+      
+      expect(shuffled_deck.first).not_to eq(original_first_word)
+      expect(shuffled_deck.last).to eq(current_deck.last)
     end
   end
 
