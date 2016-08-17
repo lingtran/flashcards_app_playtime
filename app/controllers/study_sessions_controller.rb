@@ -13,13 +13,15 @@ class StudySessionsController < FlashcardsController
       answer_correct?
       process_score
 
-      flash[:score_popup] = "Your score is #{session[:tallied_score]}"
+      flash[:score_popup]   = "Your score is #{session[:tallied_score]}"
       flash[:encouragement] = "Have another go at it"
+
+      DeckQuestionWord.shuffle_deck(current_deck, params[:deck_id])
 
       redirect_to flashcard_user_path(current_user, params[:deck_id])
     else
       answer_correct?
-      
+
       redirect_to flashcard_page_user_path(current_user, params[:deck_id], page: next_page)
     end
   end

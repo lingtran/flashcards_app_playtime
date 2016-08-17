@@ -6,10 +6,12 @@ class FlashcardsController < ApplicationController
   end
 
   def show
-    @deck_words_per_page = current_deck.paginate(:page => params[:page], :per_page => 1)
+    deck                 = current_deck
+    @deck_words_per_page = deck.paginate(:page => params[:page], :per_page => 1)
   end
 
   def current_deck
-    @current_deck ||= DeckQuestionWord.where(deck_id: params[:deck_id].to_i).limit(7)
+    @current_deck ||= DeckQuestionWord.set_deck(params[:deck_id])
+    return @current_deck
   end
 end
